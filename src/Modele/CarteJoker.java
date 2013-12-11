@@ -1,7 +1,6 @@
 package Modele;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class CarteJoker extends Carte {
 
@@ -12,7 +11,7 @@ public class CarteJoker extends Carte {
 
 	@Override
 	public void effetCarte(Joueur joueur, Joueur joueurAffecte, Pioche p, ArrayList<Joueur> j,Talon t) {
-		int choix = joueur.choisirCouleur(t);
+		int choix = joueur.choisirCouleur(t,joueur);
 		if (choix == 0)
 			this.setCouleur(RED);
 		if (choix == 1)

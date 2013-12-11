@@ -3,7 +3,7 @@ package Modele;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
+
 
 
 import Modele.Carte;
@@ -13,7 +13,7 @@ import Modele.Pioche;
 import Modele.TasCartes;
 
 public class Partie {
-	final static Color[] COULEURS = { Color.RED, Color.MAGENTA, Color.BLUE,
+	final static Color[] COULEURS = { Color.RED, Color.YELLOW, Color.BLUE,
 			Color.GREEN };
 
 	private ArrayList<Joueur> listeJoueurs;
@@ -26,7 +26,7 @@ public class Partie {
 	public Pioche pioche = new Pioche();
 	private boolean partieEstFinie = false;
 	private boolean refairePioche = false;
-	private boolean uno=false;
+
 
 	public void remplirPioche() {
 
@@ -84,7 +84,7 @@ public class Partie {
 
 	public void refairePioche() {
 
-		if (this.pioche.getListeCarte().size() < 6) {
+		if (this.pioche.getListeCarte().size() < 15) {
 			Carte derniereCarteTalon = this.talon.retirerDerniereCarte();
 			this.talon.viderDans(this.pioche);
 			Collections.shuffle(this.pioche.listeCarte);
@@ -197,11 +197,9 @@ public class Partie {
 				this.joueurCourant=this.choixJoueur();
 			}
 			System.out.println("le talon : " + this.talon.getDerniereCarte());
-			System.out.println(this.joueurCourant.getNom()
-					+ " a les cartes suivantes : "
-					+ this.joueurCourant.getMain());
+			System.out.println(this.joueurCourant.getNom()+ " a les cartes suivantes : "+ this.joueurCourant.getMain());
 
-			int choix = this.joueurCourant.choisirAction(this.talon);
+			int choix = this.joueurCourant.choisirAction(this.talon,this.joueurCourant);
 			if (choix == 1)
 			{
 				Carte cartePiochee = this.pioche.retirerDerniereCarte();
@@ -209,19 +207,30 @@ public class Partie {
 				if(this.talon.getDerniereCarte().comparerCarte(cartePiochee))
 				{
 					System.out.println(this.joueurCourant.getNom() + " a les cartes suivantes : " +this.joueurCourant.getMain());
-					this.joueurCourant.choisirAction(this.talon);
+					int str = this.joueurCourant.choisirCarte(this.talon,this.joueurCourant);
+					this.carteCourante = this.joueurCourant.getCarteChoisie(str);
+
+					while (!this.talon.getDerniereCarte().comparerCarte(
+							this.carteCourante)) {
+						int str1 = this.joueurCourant.choisirCarte(this.talon,this.joueurCourant);
+						this.carteCourante = this.joueurCourant
+								.getCarteChoisie(str1);
+						str = str1;
+					}
+					this.carteCourante = this.joueurCourant.getCarteChoisie(str);
+					this.jouerCarte(this.carteCourante);
 				}
 			}
 			else if (choix == 2)
 				this.joueurCourant.passerSonTour(this.talon);
 
 			else if (choix == 0) {
-				int str = this.joueurCourant.choisirCarte(this.talon);
+				int str = this.joueurCourant.choisirCarte(this.talon,this.joueurCourant);
 				this.carteCourante = this.joueurCourant.getCarteChoisie(str);
 
 				while (!this.talon.getDerniereCarte().comparerCarte(
 						this.carteCourante)) {
-					int str1 = this.joueurCourant.choisirCarte(this.talon);
+					int str1 = this.joueurCourant.choisirCarte(this.talon,this.joueurCourant);
 					this.carteCourante = this.joueurCourant
 							.getCarteChoisie(str1);
 					str = str1;

@@ -12,7 +12,7 @@ public class JoueurReel extends Joueur{
 	{
 		this.setPeutJouer(false);
 	}
-	public int choisirCouleur(Talon t)
+	public int choisirCouleur(Talon t,Joueur j)
 	{
 		int choix = -1;
 		while (choix != 0 && choix != 1 && choix != 2 && choix !=3) {
@@ -23,7 +23,7 @@ public class JoueurReel extends Joueur{
 		return choix;
 	}
 	
-	public int choisirCarte(Talon t)
+	public int choisirCarte(Talon t,Joueur j)
 	{
 		
 		int choix = 0;
@@ -44,7 +44,7 @@ public class JoueurReel extends Joueur{
 		return choix;		
 	}
 	
-	public int choisirAction(Talon t)
+	public int choisirAction(Talon t,Joueur j)
 	{
 		int choix = -1;
 		while (choix != 0 && choix != 1 && choix != 2) {

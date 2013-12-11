@@ -72,7 +72,7 @@ public abstract class Carte
 	{
 		if((this.couleur == c.couleur) || (this.valeur == c.valeur))
 			return true;
-		else if (c instanceof CarteJoker || c instanceof CartePlusQuatre || this instanceof CarteJoker || this instanceof CartePlusQuatre)
+		else if (c instanceof CarteJoker || c instanceof CartePlusQuatre)
 			return true;
 		
 		return false;

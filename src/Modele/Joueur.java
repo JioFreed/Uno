@@ -1,8 +1,7 @@
 package Modele;
 
-import java.awt.Color;
+//import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import Modele.Carte;
 
@@ -115,12 +114,16 @@ public abstract class Joueur {
 		return this.main.get(i);
 	}
 	
+	public void douter()
+	{
+		System.out.println(this.getNom() + " se méfie et demande de voir les cartes ");
+	}
 	public abstract void passerSonTour(Talon t);;
-	public abstract int choisirCouleur(Talon t);
+	public abstract int choisirCouleur(Talon t,Joueur j);
 	
-	public abstract int choisirCarte(Talon t);
+	public abstract int choisirCarte(Talon t,Joueur j);
 	
-	public abstract int choisirAction(Talon t);
+	public abstract int choisirAction(Talon t,Joueur j);
 	
 	
 

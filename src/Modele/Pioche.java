@@ -2,7 +2,6 @@ package Modele;
 
 import java.util.Collections;
 
-import Modele.Carte;
 
 public class Pioche extends TasCartes {
 

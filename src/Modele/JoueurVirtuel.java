@@ -1,42 +1,36 @@
 package Modele;
 
-import java.util.Scanner;
 
 public class JoueurVirtuel extends Joueur {
+	private Strategy strategy;
 	
-	public JoueurVirtuel(String nom)
+	public JoueurVirtuel(String nom,Strategy strategy)
 	{
 		super(nom);
+		this.strategy=strategy;
 	}
-	
-	public void passerSonTour(Talon t)
-	{
-		this.setEstJoueurActuel(false);
-	}
-	public int choisirCouleur(Talon t)
-	{
+
+	@Override
+	public void passerSonTour(Talon t) {
+		this.setPeutJouer(false);
 		
-		return 0;
 	}
-	
-	public int choisirCarte(Talon t)
-	{
-		for (int i=0; i<this.main.size();i++)
-		{
-			if (this.main.get(i).comparerCarte(t.getDerniereCarte()))
-				return i;
-		}
-		return 0;		
+
+	@Override
+	public int choisirCouleur(Talon t, Joueur j) {
+		return strategy.choisirCouleur(t, j);
 	}
-	
-	public int choisirAction(Talon t)
-	{
-		for (int i=0; i<this.main.size();i++)
-		{
-			if (this.main.get(i).comparerCarte(t.getDerniereCarte()))
-				return 0;
-		}
-		return 1;		
+
+	@Override
+	public int choisirCarte(Talon t, Joueur j) {
+		// TODO Auto-generated method stub
+		return strategy.choisirCarte(t, j);
+	}
+
+	@Override
+	public int choisirAction(Talon t, Joueur j) {
+		// TODO Auto-generated method stub
+		return strategy.choisirAction(t, j);
 	}
 	
 }
