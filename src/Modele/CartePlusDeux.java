@@ -8,7 +8,7 @@ public class CartePlusDeux extends Carte{
 
 	
 	public CartePlusDeux(int couleur) {
-		super(couleur, 11, 2);
+		super(couleur, 11, 2,20);
 	}
 
 	@Override

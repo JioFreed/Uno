@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CartePlusQuatre extends Carte {
 
 	public CartePlusQuatre(int couleur) {
-		super(couleur,12,4);
+		super(couleur,12,4,50);
 	}
 
 	@Override
@@ -21,14 +21,15 @@ public class CartePlusQuatre extends Carte {
 			this.setCouleur(YELLOW);
 		if (choix == 3)
 			this.setCouleur(GREEN);
-		joueurAffecte.douter();
-		for (int i=0;i<joueur.main.size();i++)
+		if(t.listeCarte.size() > 1)
 		{
-			if(joueur.main.get(i).getCouleur() == t.listeCarte.get(1).getCouleur())
+			joueurAffecte.douter();
+			if (joueur.verifierCouleur(t))
 				joueur.ajouterCarte(p.retirerQuatreDernieresCartes());
 			else
 				joueurAffecte.ajouterCarte(p.retirerDeuxDernieresCartes());
 		}
+			
 	}
 		
 }

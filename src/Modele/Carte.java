@@ -27,6 +27,7 @@ public abstract class Carte
 	private int couleur;
 	private int valeur;
 	private int plus;
+	private int point;
 	
 	 public String toString() {
 		StringBuffer sb = new StringBuffer();
@@ -36,14 +37,23 @@ public abstract class Carte
 		return sb.toString();
 	 } 
 	 
-	public Carte (int couleur, int valeur,int plus)
+	public Carte (int couleur, int valeur,int plus, int point)
 	{	
 		this.couleur = couleur;
 		this.valeur= valeur;
 		this.plus=plus;
+		this.point=point;
 	}
 	
 	
+	public int getPoint() {
+		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
 	public int getCouleur() {
 		return couleur;
 	}

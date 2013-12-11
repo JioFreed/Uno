@@ -6,7 +6,7 @@ import java.util.Collections;
 public class CarteInverser extends Carte{
 
 	public CarteInverser(int couleur) {
-		super(couleur, 14, -1);
+		super(couleur, 14, -1,20);
 		// TODO Auto-generated constructor stub
 	}
 

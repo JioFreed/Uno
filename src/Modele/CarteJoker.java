@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CarteJoker extends Carte {
 
 	public CarteJoker(int couleur) {
-		super(couleur, 13, -1);
+		super(couleur, 13, -1,50);
 		// TODO Auto-generated constructor stub
 	}
 

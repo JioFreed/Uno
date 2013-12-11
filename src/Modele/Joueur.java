@@ -18,6 +18,8 @@ public abstract class Joueur {
 	
 	private boolean peutJouer ;
 	
+	private int score=0;
+	
 
 	public boolean isPeutJouer() {
 		return peutJouer;
@@ -54,7 +56,24 @@ public abstract class Joueur {
 		for(int i=0;i<c.size();i++)
 			this.main.add(0,c.get(i));
 	}
+	public int getScore()
+	{
+		return this.score;
+	}
 	
+	public void setScore(int s)
+	{
+		this.score+=s;
+	}
+	public boolean verifierCouleur(Talon t)
+	{
+		for (int i=0;i<this.main.size();i++)
+		{
+			if(this.main.get(i).getCouleur() == t.listeCarte.get(1).getCouleur())
+				return true;
+		}
+		return false;
+	}
 	public void retirerCarteMain (Carte carteASup)
 	{
 		int indice = 0;
