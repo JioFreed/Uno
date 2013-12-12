@@ -7,35 +7,21 @@ public class Normal implements Strategy {
 	public void passerSonTour(Talon t)
 	{
 	}
-	public int choisirCouleur(Talon t, Joueur j)
+	public int choisirCouleur(Talon t, Joueur j, Joueur j2)
 	{
 		return (int)(Math.random() * (3-0));
 	}
 	
-	public int choisirCarte(Talon t, Joueur j)
+	public int choisirCarte(Talon t, Joueur j, Joueur j2)
 	{
-		if(this.jouerCarteStandard(t, j) != -1)
-			return this.jouerCarteStandard(t, j);
-		
-		else if(this.jouerCarteJoker(t, j) != -1)
-			return this.jouerCarteJoker(t, j);
-		
-		else if (this.jouerCarteInverser(t, j) != -1)
-			return this.jouerCarteInverser(t, j);
-		
-		else if(this.jouerCarteStop(t, j) != -1)
-			return this.jouerCarteStop(t, j);
-		
-		else if(this.jouerCarte2(t, j) != -1)
-			return this.jouerCarte2(t, j);
-		
-		if(this.jouerCarte4(t, j) != -1)
-			return this.jouerCarte4(t, j);
-	
-		return 0;	
+		if(j2.getMain().size() > 3)
+			return this.comportementNormal(t, j, j2);
+		else
+			return this.skyzo(t, j, j2);
+
 	}			
 	
-	public int choisirAction(Talon t, Joueur j)
+	public int choisirAction(Talon t, Joueur j, Joueur j2)
 	{
 		for (int i=0; i<j.main.size();i++)
 		{
@@ -108,5 +94,51 @@ public class Normal implements Strategy {
 		}
 		return -1;
 	}
+	
+	public int comportementNormal(Talon t,Joueur j, Joueur j2)
+	{
+		if(this.jouerCarteStandard(t, j) != -1)
+			return this.jouerCarteStandard(t, j);
+		
+		else if(this.jouerCarteJoker(t, j) != -1)
+			return this.jouerCarteJoker(t, j);
+		
+		else if (this.jouerCarteInverser(t, j) != -1)
+			return this.jouerCarteInverser(t, j);
+		
+		else if(this.jouerCarteStop(t, j) != -1)
+			return this.jouerCarteStop(t, j);
+		
+		else if(this.jouerCarte2(t, j) != -1)
+			return this.jouerCarte2(t, j);
+		
+		if(this.jouerCarte4(t, j) != -1)
+			return this.jouerCarte4(t, j);
+	
+		return 0;	
+	}
 
+	public int skyzo(Talon t,Joueur j,Joueur j2)
+	{
+		if(this.jouerCarte4(t, j) != -1)
+			return this.jouerCarte4(t, j);
+		
+		else if(this.jouerCarte2(t, j) != -1)
+			return this.jouerCarte2(t, j);
+		
+		else if(this.jouerCarteStop(t, j) != -1)
+			return this.jouerCarteStop(t, j);
+		
+		else if(this.jouerCarteJoker(t, j) != -1)
+			return this.jouerCarteJoker(t, j);
+		
+		else if (this.jouerCarteInverser(t, j) != -1)
+			return this.jouerCarteInverser(t, j);
+		
+		else if(this.jouerCarteStandard(t, j) != -1)
+			return this.jouerCarteStandard(t, j);
+		
+		
+		return 0;
+	}
 }

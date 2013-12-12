@@ -12,7 +12,7 @@ public class CartePlusQuatre extends Carte {
 	public void effetCarte(Joueur joueur,Joueur joueurAffecte, Pioche p, ArrayList<Joueur> j,Talon t) {
 		joueurAffecte.ajouterCarte(p.retirerQuatreDernieresCartes());
 		joueurAffecte.passerSonTour(null);
-		int choix = joueur.choisirCouleur(t,joueur);
+		int choix = joueur.choisirCouleur(t,joueur,joueurAffecte);
 		if (choix == 0)
 			this.setCouleur(RED);
 		if (choix == 1)

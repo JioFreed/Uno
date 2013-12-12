@@ -17,14 +17,14 @@ public class JoueurVirtuel extends Joueur {
 	}
 
 	@Override
-	public int choisirCouleur(Talon t, Joueur j) {
-		return strategy.choisirCouleur(t, j);
+	public int choisirCouleur(Talon t, Joueur j, Joueur j2) {
+		return strategy.choisirCouleur(t, j,j2);
 	}
 
 	@Override
-	public int choisirCarte(Talon t, Joueur j) {
+	public int choisirCarte(Talon t, Joueur j, Joueur j2) {
 		// TODO Auto-generated method stub
-		return strategy.choisirCarte(t, j);
+		return strategy.choisirCarte(t, j,j2);
 	}
 
 	public Strategy getStrategy() {
@@ -36,9 +36,9 @@ public class JoueurVirtuel extends Joueur {
 	}
 
 	@Override
-	public int choisirAction(Talon t, Joueur j) {
+	public int choisirAction(Talon t, Joueur j, Joueur j2) {
 		// TODO Auto-generated method stub
-		return strategy.choisirAction(t, j);
+		return strategy.choisirAction(t, j,j2);
 	}
 
 	@Override

@@ -135,11 +135,11 @@ public abstract class Joueur {
 	
 	public abstract boolean douter();
 	public abstract void passerSonTour(Talon t);;
-	public abstract int choisirCouleur(Talon t,Joueur j);
+	public abstract int choisirCouleur(Talon t,Joueur j, Joueur j2);
 	
-	public abstract int choisirCarte(Talon t,Joueur j);
+	public abstract int choisirCarte(Talon t,Joueur j, Joueur j2);
 	
-	public abstract int choisirAction(Talon t,Joueur j);
+	public abstract int choisirAction(Talon t,Joueur j, Joueur j2);
 	
 	
 

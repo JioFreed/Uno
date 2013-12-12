@@ -7,13 +7,13 @@ public class Aggressif implements Strategy{
 	}
 
 	@Override
-	public int choisirCouleur(Talon t,Joueur j) {
+	public int choisirCouleur(Talon t,Joueur j, Joueur j2) {
 		return (int)(Math.random() * (3-0));
 	}
 
 	@Override
 	
-	public int choisirCarte(Talon t,Joueur j) {
+	public int choisirCarte(Talon t,Joueur j, Joueur j2) {
 		if(this.jouerCarte4(t, j) != -1)
 			return this.jouerCarte4(t, j);
 		
@@ -37,7 +37,7 @@ public class Aggressif implements Strategy{
 	}
 
 	@Override
-	public int choisirAction(Talon t,Joueur j) {
+	public int choisirAction(Talon t,Joueur j, Joueur j2) {
 		for (int i=0; i<j.main.size();i++)
 		{
 			if (t.getDerniereCarte().comparerCarte(j.main.get(i)))

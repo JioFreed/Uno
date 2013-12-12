@@ -202,7 +202,7 @@ public class Manche {
 			System.out.println("le talon : " + this.talon.getDerniereCarte());
 			System.out.println(this.joueurCourant.getNom()+ " a les cartes suivantes : "+ this.joueurCourant.getMain());
 
-			int choix = this.joueurCourant.choisirAction(this.talon,this.joueurCourant);
+			int choix = this.joueurCourant.choisirAction(this.talon,this.joueurCourant,this.choixJoueur());
 			if (choix == 1)
 			{
 				Carte cartePiochee = this.pioche.retirerDerniereCarte();
@@ -217,12 +217,12 @@ public class Manche {
 				this.joueurCourant.passerSonTour(this.talon);
 
 			else if (choix == 0) {
-				int str = this.joueurCourant.choisirCarte(this.talon,this.joueurCourant);
+				int str = this.joueurCourant.choisirCarte(this.talon,this.joueurCourant,this.choixJoueur());
 				this.carteCourante = this.joueurCourant.getCarteChoisie(str);
 
 				while (!this.talon.getDerniereCarte().comparerCarte(
 						this.carteCourante)) {
-					int str1 = this.joueurCourant.choisirCarte(this.talon,this.joueurCourant);
+					int str1 = this.joueurCourant.choisirCarte(this.talon,this.joueurCourant,this.choixJoueur());
 					this.carteCourante = this.joueurCourant
 							.getCarteChoisie(str1);
 					str = str1;
