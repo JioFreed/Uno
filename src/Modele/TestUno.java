@@ -6,9 +6,9 @@ public class TestUno {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Joueur j = new JoueurVirtuel("Youssef",new Aggressif());
+		Joueur j = new JoueurVirtuel("Youssef",new Normal());
 		Joueur j1 = new JoueurVirtuel("Ayoub",new Normal());
-		Joueur j2 = new JoueurVirtuel("Hamza",new Aggressif());
+		Joueur j2 = new JoueurVirtuel("Hamza",new Normal());
 		
 		//Joueur j3 = new JoueurReel("Ilyass");
 		//Joueur j4 = new JoueurReel("toto");

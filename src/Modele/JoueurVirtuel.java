@@ -43,7 +43,7 @@ public class JoueurVirtuel extends Joueur {
 
 	@Override
 	public boolean douter() {
-		// TODO Auto-generated method stub
+		System.out.println(this.getNom() + " doute et demande de voir les cartes");
 		return strategy.douter();
 		
 	}

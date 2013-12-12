@@ -14,10 +14,8 @@ public class Normal implements Strategy {
 	
 	public int choisirCarte(Talon t, Joueur j, Joueur j2)
 	{
-		if(j2.getMain().size() > 3)
-			return this.comportementNormal(t, j, j2);
-		else
-			return this.skyzo(t, j, j2);
+		
+		return ((int)(Math.random() * (8-0))) > 4 ? this.comportementNormal(t, j, j2) :  this.skyzo(t, j, j2);
 
 	}			
 	
@@ -33,7 +31,7 @@ public class Normal implements Strategy {
 	@Override
 	public boolean douter() {
 		// TODO Auto-generated method stub
-		return true;
+		return  ((int)(Math.random() * (8-0))) > 4 ? true : false;
 	}
 	public int jouerCarte4(Talon t,Joueur j)
 	{
