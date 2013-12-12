@@ -133,10 +133,7 @@ public abstract class Joueur {
 		return this.main.get(i);
 	}
 	
-	public void douter()
-	{
-		System.out.println(this.getNom() + " se méfie et demande de voir les cartes ");
-	}
+	public abstract boolean douter();
 	public abstract void passerSonTour(Talon t);;
 	public abstract int choisirCouleur(Talon t,Joueur j);
 	

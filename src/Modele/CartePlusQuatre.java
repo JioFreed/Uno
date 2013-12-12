@@ -23,14 +23,16 @@ public class CartePlusQuatre extends Carte {
 			this.setCouleur(GREEN);
 		if(t.listeCarte.size() > 1)
 		{
-			joueurAffecte.douter();
-			if (joueur.verifierCouleur(t))
-				joueur.ajouterCarte(p.retirerQuatreDernieresCartes());
-			else
-				joueurAffecte.ajouterCarte(p.retirerDeuxDernieresCartes());
-		}
+			if(joueurAffecte.douter())
+			{
+				if (joueur.verifierCouleur(t))
+					joueur.ajouterCarte(p.retirerQuatreDernieresCartes());
+				else
+					joueurAffecte.ajouterCarte(p.retirerDeuxDernieresCartes());
+			}
 			
+		}
 	}
-		
 }
+
 

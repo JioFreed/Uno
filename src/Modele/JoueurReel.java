@@ -54,6 +54,11 @@ public class JoueurReel extends Joueur{
 		}
 		return choix;		
 	}
+	@Override
+	public boolean douter() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 	
 
 }

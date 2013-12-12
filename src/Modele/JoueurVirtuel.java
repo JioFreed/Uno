@@ -27,10 +27,25 @@ public class JoueurVirtuel extends Joueur {
 		return strategy.choisirCarte(t, j);
 	}
 
+	public Strategy getStrategy() {
+		return strategy;
+	}
+
+	public void setStrategy(Strategy strategy) {
+		this.strategy = strategy;
+	}
+
 	@Override
 	public int choisirAction(Talon t, Joueur j) {
 		// TODO Auto-generated method stub
 		return strategy.choisirAction(t, j);
+	}
+
+	@Override
+	public boolean douter() {
+		// TODO Auto-generated method stub
+		return strategy.douter();
+		
 	}
 	
 }

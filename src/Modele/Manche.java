@@ -34,42 +34,42 @@ public class Manche {
 
 		ArrayList<Carte> carte = new ArrayList<Carte>();
 		for (int i = 0; i < 10; i++) {
-			carte.add(new CarteStandard(Donnees.BLUE, i));
-			carte.add(new CarteStandard(Donnees.BLUE, i));
-			carte.add(new CarteStandard(Donnees.RED, i));
+			carte.add(new CarteStandard(Carte.BLUE, i));
+			carte.add(new CarteStandard(Carte.BLUE, i));
+			carte.add(new CarteStandard(Carte.RED, i));
 
-			carte.add(new CarteStandard(Donnees.RED, i));
-			carte.add(new CarteStandard(Donnees.GREEN, i));
-			carte.add(new CarteStandard(Donnees.GREEN, i));
-			carte.add(new CarteStandard(Donnees.YELLOW, i));
-			carte.add(new CarteStandard(Donnees.YELLOW, i));
+			carte.add(new CarteStandard(Carte.RED, i));
+			carte.add(new CarteStandard(Carte.GREEN, i));
+			carte.add(new CarteStandard(Carte.GREEN, i));
+			carte.add(new CarteStandard(Carte.YELLOW, i));
+			carte.add(new CarteStandard(Carte.YELLOW, i));
 
 		}
 
 		
 		  for (int i = 0; i < 2; i++) {
-			  carte.add(new CarteStop(Donnees.BLUE));
-			  carte.add(new CarteStop(Donnees.RED));
-			  carte.add(new CarteStop(Donnees.GREEN)); 
-			  carte.add(new CarteStop(Donnees.YELLOW));
-			  carte.add(new CartePlusDeux(Donnees.BLUE)); 
-			  carte.add(new	CartePlusDeux(Donnees.RED));
-			  carte.add(new CartePlusDeux(Donnees.GREEN));
-			  carte.add(new CartePlusDeux(Donnees.YELLOW));
+			  carte.add(new CarteStop(Carte.BLUE));
+			  carte.add(new CarteStop(Carte.RED));
+			  carte.add(new CarteStop(Carte.GREEN)); 
+			  carte.add(new CarteStop(Carte.YELLOW));
+			  carte.add(new CartePlusDeux(Carte.BLUE)); 
+			  carte.add(new	CartePlusDeux(Carte.RED));
+			  carte.add(new CartePlusDeux(Carte.GREEN));
+			  carte.add(new CartePlusDeux(Carte.YELLOW));
 		 }
 		 
 
 		for (int i = 0; i < 4; i++) {
-			carte.add(new CarteJoker(Donnees.BLACK));
-			carte.add(new CartePlusQuatre(Donnees.BLACK));
+			carte.add(new CarteJoker(Carte.BLACK));
+			carte.add(new CartePlusQuatre(Carte.BLACK));
 		}
 
 		
 		  for (int i = 0; i < 2; i++) { carte.add(new
-		  CarteInverser(Donnees.BLUE)); carte.add(new
-		  CarteInverser(Donnees.RED));  carte.add(new
-		 CarteInverser(Donnees.GREEN)); carte.add(new
-		  CarteInverser(Donnees.YELLOW));
+		  CarteInverser(Carte.BLUE)); carte.add(new
+		  CarteInverser(Carte.RED));  carte.add(new
+		 CarteInverser(Carte.GREEN)); carte.add(new
+		  CarteInverser(Carte.YELLOW));
 		 
 		 }
 		 
@@ -257,9 +257,7 @@ public class Manche {
 			for (Joueur joueurCourant : this.joueurs) {
 				if (joueurCourant.getMain().isEmpty()) {
 					score=0;
-					this.mancheEstFinie = true;
-					//System.out.println(joueurCourant.getNom()+ " a gagné la partie ");
-				
+					this.mancheEstFinie = true;				
 					for (Joueur joueurCourant2 : this.joueurs)
 					{
 						for(int i=0;i<joueurCourant2.main.size();i++)
