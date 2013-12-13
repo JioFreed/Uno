@@ -370,7 +370,7 @@ public class Manche {
 		return mancheEstFinie;
 	}
 
-	public void setMancheEstFinie(boolean partieEstFinie) {
+	public void setMancheEstFinie(boolean mancheEstFinie) {
 		this.mancheEstFinie = mancheEstFinie;
 	}
 

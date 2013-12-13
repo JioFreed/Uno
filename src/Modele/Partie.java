@@ -29,9 +29,22 @@ public class Partie {
 		this.partieEstFinie();
 		while(!partieEstFinie)
 		{
-			manche.commencerPartie();this.partieEstFinie();}
+			if(parametrePartie())
+			{
+				manche.commencerPartie();this.partieEstFinie();}
+			else
+			{
+				System.out.println("Les paramètres de la partie ne sont pas valides");
+				this.setPartieEstFinie(true);
+			}
+		}
 	}
 	
+	public boolean parametrePartie()
+	{
+		 return manche.joueurs.size() >2 && manche.joueurs.size() <7 ? true : false;
+		
+	}
 	public void partieEstFinie()
 	{
 		if (!this.partieEstFinie) {
