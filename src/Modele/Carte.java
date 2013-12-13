@@ -27,6 +27,14 @@ public abstract class Carte
 	private int couleur;
 	private int valeur;
 	private int plus;
+	public int getPlus() {
+		return plus;
+	}
+
+	public void setPlus(int plus) {
+		this.plus = plus;
+	}
+
 	private int point;
 	
 	 public String toString() {

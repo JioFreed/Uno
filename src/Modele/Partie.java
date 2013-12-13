@@ -1,17 +1,5 @@
 package Modele;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Collections;
-
-
-
-import Modele.Carte;
-import Modele.Talon;
-import Modele.Joueur;
-import Modele.Pioche;
-import Modele.TasCartes;
-
 public class Partie {
 	private Manche manche;
 	private boolean partieEstFinie=false;

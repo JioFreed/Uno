@@ -7,14 +7,16 @@ public class CarteInverser extends Carte{
 
 	public CarteInverser(int couleur) {
 		super(couleur, 14, -1,20);
-		// TODO Auto-generated constructor stub
 	}
 
 
 
 	@Override
 	public void effetCarte(Joueur joueur, Joueur joueurAffecte, Pioche p, ArrayList<Joueur> j,Talon t) {
-		Collections.reverse(j);
+		if (j.size() <2)
+			joueurAffecte.passerSonTour(null);
+		else
+			Collections.reverse(j);
 		
 	}
 

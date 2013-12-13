@@ -1,6 +1,6 @@
 package Modele;
 
-//import java.awt.Color;
+
 import java.util.ArrayList;
 
 import Modele.Carte;
@@ -21,20 +21,20 @@ public abstract class Joueur {
 	private int score=0;
 	
 
+	public Joueur (String nom)
+	{
+		this.nom = nom;
+		this.setEstJoueurActuel(true);
+		this.setPeutJouer(true);
+	}
+
+
 	public boolean isPeutJouer() {
 		return peutJouer;
 	}
 
 	public void setPeutJouer(boolean peutJouer) {
 		this.peutJouer = peutJouer;
-	}
-
-	public Joueur (String nom)
-	{
-		this.nom = nom;
-		this.setEstJoueurActuel(true);
-		this.setPeutJouer(true);
-		// Couleur par défaut
 	}
 
 	public String getNom() {
