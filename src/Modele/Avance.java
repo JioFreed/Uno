@@ -1,9 +1,7 @@
 package Modele;
 
-
-public class Normal implements Strategy {
-
-	@Override
+public class Avance implements Strategy {
+	
 	public void passerSonTour(Talon t)
 	{
 	}
@@ -15,7 +13,7 @@ public class Normal implements Strategy {
 	public int choisirCarte(Talon t, Joueur j, Joueur j2)
 	{
 		
-		return ((int)(Math.random() * (8-0))) > 4 ? this.comportementNormal(t, j, j2) :  this.skyzo(t, j, j2);
+		return this.comportementNormal(t, j, j2);
 
 	}			
 	
@@ -30,8 +28,7 @@ public class Normal implements Strategy {
 	}
 	@Override
 	public boolean douter() {
-		// TODO Auto-generated method stub
-		return  ((int)(Math.random() * (8-0))) > 4 ? true : false;
+		return true;
 	}
 	public int jouerCarte4(Talon t,Joueur j)
 	{
@@ -116,27 +113,4 @@ public class Normal implements Strategy {
 		return 0;	
 	}
 
-	public int skyzo(Talon t,Joueur j,Joueur j2)
-	{
-		if(this.jouerCarte4(t, j) != -1)
-			return this.jouerCarte4(t, j);
-		
-		else if(this.jouerCarte2(t, j) != -1)
-			return this.jouerCarte2(t, j);
-		
-		else if(this.jouerCarteStop(t, j) != -1)
-			return this.jouerCarteStop(t, j);
-		
-		else if(this.jouerCarteJoker(t, j) != -1)
-			return this.jouerCarteJoker(t, j);
-		
-		else if (this.jouerCarteInverser(t, j) != -1)
-			return this.jouerCarteInverser(t, j);
-		
-		else if(this.jouerCarteStandard(t, j) != -1)
-			return this.jouerCarteStandard(t, j);
-		
-		
-		return 0;
-	}
 }

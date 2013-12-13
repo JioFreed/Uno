@@ -19,10 +19,6 @@ public class TasCartes{
 		return listeCarte;
 	}
 	
-	public Carte getDerniereCarte()
-	{
-		return listeCarte.get(0);
-	}
 
 	public void setListeCarte(ArrayList<Carte> listeCarte) {
 		this.listeCarte = listeCarte;
@@ -40,13 +36,6 @@ public class TasCartes{
 		Carte derniereCarte = this.listeCarte.get(0);
 		this.listeCarte.remove(0);
 		return derniereCarte;
-	}
-	
-	
-	public void viderDans (TasCartes tasARemplir)
-	{
-		while (!this.listeCarte.isEmpty())
-			tasARemplir.ajouterCarte(this.retirerDerniereCarte());
 	}
 	
 	

@@ -30,7 +30,7 @@ public class Partie {
 	
 	public boolean parametrePartie()
 	{
-		 return manche.joueurs.size() >2 && manche.joueurs.size() <7 ? true : false;
+		 return manche.joueurs.size() >= 2 && manche.joueurs.size() <=7 ? true : false;
 		
 	}
 	public void partieEstFinie()

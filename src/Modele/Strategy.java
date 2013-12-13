@@ -10,4 +10,5 @@ public interface Strategy {
 	
 	public int choisirAction(Talon t,Joueur j, Joueur j2);
 
+	
 }
