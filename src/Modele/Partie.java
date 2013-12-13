@@ -28,6 +28,14 @@ public class Partie {
 		}
 	}
 	
+	public Manche getManche() {
+		return manche;
+	}
+
+	public void setManche(Manche manche) {
+		this.manche = manche;
+	}
+
 	public boolean parametrePartie()
 	{
 		 return manche.joueurs.size() >= 2 && manche.joueurs.size() <=7 ? true : false;

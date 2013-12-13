@@ -17,9 +17,16 @@ public class Manche {
 	final static Color[] COULEURS = { Color.RED, Color.YELLOW, Color.BLUE,
 			Color.GREEN };
 
-	private ArrayList<Joueur> listeJoueurs;
 	public Joueur joueurCourant;
 	public Joueur joueurSuivant;
+	public ArrayList<Joueur> getJoueurs() {
+		return joueurs;
+	}
+
+	public void setJoueurs(ArrayList<Joueur> joueurs) {
+		this.joueurs = joueurs;
+	}
+
 	public TasCartes Tas;
 	public Carte carteCourante;
 	public ArrayList<Joueur> joueurs;
@@ -113,11 +120,12 @@ public class Manche {
 	}
 
 	public void ordonnerJoueur(int choix) {
+		ArrayList<Joueur> listeJoueurs = new ArrayList<Joueur>();;
 		for (int i = choix + 1; i < this.joueurs.size(); i++)
 			listeJoueurs.add(this.joueurs.get(i));
 		for (int i = 0; i < choix + 1; i++)
 			listeJoueurs.add(this.joueurs.get(i));
-		this.joueurs = this.listeJoueurs;
+		this.joueurs = listeJoueurs;
 	}
 
 	public int choixDistributeur() {
@@ -284,7 +292,7 @@ public class Manche {
 			}
 			this.talon.listeCarte.clear();
 			this.pioche.listeCarte.clear();
-			this.listeJoueurs = new ArrayList<Joueur>();
+			//this.listeJoueurs = new ArrayList<Joueur>();
 		}
 	}
 			
@@ -309,7 +317,7 @@ public class Manche {
 
 	public Manche() {
 		this.joueurs = new ArrayList<Joueur>();
-		this.listeJoueurs = new ArrayList<Joueur>();
+		//this.listeJoueurs = new ArrayList<Joueur>();
 		this.mancheEstFinie = false;
 
 	}
