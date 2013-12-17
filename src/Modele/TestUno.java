@@ -7,16 +7,15 @@ public class TestUno {
 	 */
 	public static void main(String[] args) {
 		
-		Joueur j = new JoueurVirtuel("Youssef",new Imprevisible());
+		/*Joueur j = new JoueurVirtuel("Youssef",new Imprevisible());
 		Joueur j1 = new JoueurVirtuel("Ayoub",new Avance());
 		Joueur j2 = new JoueurVirtuel("Hamza",new Avance());	
-		Joueur j3 = new JoueurVirtuel("Ilyass",new Aggressif());
-		Manche m= new Manche();
-		Partie p = new Partie(m);
-		p.ajouterJoueur(j);
+		Joueur j3 = new JoueurVirtuel("Ilyass",new Aggressif());*/
+		Partie p = new Partie();
+		/*p.ajouterJoueur(j);
 		p.ajouterJoueur(j1);
 		p.ajouterJoueur(j2);
-		p.ajouterJoueur(j3);
+		p.ajouterJoueur(j3);*/
 		p.demarerPartie();
 
 	}

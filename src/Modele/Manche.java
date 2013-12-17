@@ -19,14 +19,6 @@ public class Manche {
 
 	public Joueur joueurCourant;
 	public Joueur joueurSuivant;
-	public ArrayList<Joueur> getJoueurs() {
-		return joueurs;
-	}
-
-	public void setJoueurs(ArrayList<Joueur> joueurs) {
-		this.joueurs = joueurs;
-	}
-
 	public TasCartes Tas;
 	public Carte carteCourante;
 	public ArrayList<Joueur> joueurs;
@@ -35,7 +27,6 @@ public class Manche {
 	private boolean mancheEstFinie;
 	private boolean refairePioche = false;
 	public int score=0;
-
 
 	public void remplirPioche() {
 
@@ -84,7 +75,6 @@ public class Manche {
 		for (int i = 0; i < carte.size(); i++) {
 			this.pioche.ajouterCarte(carte.get(i));
 		}
-		System.out.println(this.pioche.getListeCarte());
 	}
 
 	public void ajouterJoueur(Joueur j) {
@@ -93,7 +83,7 @@ public class Manche {
 
 	public void refairePioche() {
 
-		if (this.pioche.getListeCarte().size() < 15) {
+		if (this.pioche.getListeCarte().size() < 10) {
 			Carte derniereCarteTalon = this.talon.retirerDerniereCarte();
 			this.talon.viderDans(this.pioche);
 			Collections.shuffle(this.pioche.listeCarte);
@@ -173,7 +163,6 @@ public class Manche {
 			Collections.reverse(this.joueurs);
 			this.joueurSuivant = this.joueurs.get(0);
 		}
-		System.out.println(this.pioche.listeCarte.size());
 		this.mancheSuivante();
 
 	}
@@ -298,18 +287,20 @@ public class Manche {
 			
 	public int getScoreTotal()
 	{
+		int max=0;
+		Joueur joueur= joueurs.get(0);
 		for (Joueur joueurCourant : this.joueurs) 
 		{
-			if( joueurCourant.getScore() >= 500)
-				return joueurCourant.getScore();
+			if( joueurCourant.getScore() >= joueur.getScore())
+				max= joueurCourant.getScore();
 		}
-		return 0;
+		return max;
 	}
 
 	public Joueur getJoueurGagnant() {
 		for (Joueur joueurCourant : this.joueurs) 
 		{
-			if( joueurCourant.getScore() >= 500)
+			if( joueurCourant.getScore() >= Partie.getScoreGagnant())
 				return joueurCourant;
 		}
 		return null;
@@ -317,7 +308,6 @@ public class Manche {
 
 	public Manche() {
 		this.joueurs = new ArrayList<Joueur>();
-		//this.listeJoueurs = new ArrayList<Joueur>();
 		this.mancheEstFinie = false;
 
 	}
@@ -381,6 +371,12 @@ public class Manche {
 	public void setMancheEstFinie(boolean mancheEstFinie) {
 		this.mancheEstFinie = mancheEstFinie;
 	}
+	public ArrayList<Joueur> getJoueurs() {
+		return joueurs;
+	}
 
+	public void setJoueurs(ArrayList<Joueur> joueurs) {
+		this.joueurs = joueurs;
+	}
 }
 
