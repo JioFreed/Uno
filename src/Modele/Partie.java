@@ -28,9 +28,9 @@ public class Partie {
 
 	public void parametrePartie() {
 		int choix = 0;
+		Scanner sc = new Scanner(System.in);
 		while (choix < 1) {
 			System.out.println("Veuillez choisir le nombre de joueurs : ");
-			Scanner sc = new Scanner(System.in);
 			choix = sc.nextInt();
 			for (int i = 0; i < choix; i++) {
 				System.out.println("Veuillez choisir le nom du joueur " + i + " :");
@@ -57,6 +57,25 @@ public class Partie {
 
 				}
 			}
+		}
+		int s=0;
+		while(s!=1 && s!=2)
+		{
+			System.out.println("le score gagnant est " +getScoreGagnant()+ " points, Voulez vous le changer ? : 1- Oui  2- Non");
+			s= sc.nextInt();
+			if(s == 1)
+			{
+				int sf=-1;
+				while(sf<0)
+				{
+					System.out.println("Définissez le nouveau score gagnant  : ");
+					sf=sc.nextInt();
+				}
+				setScoreGagnant(sf);
+			
+			}
+			else if(s == 2)
+				continue;
 		}
 	}
 
