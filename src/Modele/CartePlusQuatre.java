@@ -10,8 +10,6 @@ public class CartePlusQuatre extends Carte {
 
 	@Override
 	public void effetCarte(Joueur joueur,Joueur joueurAffecte, Pioche p, ArrayList<Joueur> j,Talon t) {
-		joueurAffecte.ajouterCarte(p.retirerQuatreDernieresCartes());
-		joueurAffecte.passerSonTour(null);
 		int choix = joueur.choisirCouleur(t,joueur,joueurAffecte);
 		if (choix == 0)
 			this.setCouleur(RED);
@@ -26,9 +24,16 @@ public class CartePlusQuatre extends Carte {
 			if(joueurAffecte.douter())
 			{
 				if (joueur.verifierCouleur(t))
-					joueur.ajouterCarte(p.retirerQuatreDernieresCartes());
-				else
-					joueurAffecte.ajouterCarte(p.retirerDeuxDernieresCartes());
+				{
+					System.out.println(joueur.getNom() + " a bien bluffé !! ");
+					joueur.ajouterCarte(p.retirerQuatreDernieresCartes(t));
+				}
+				else{
+					System.out.println("Vous vous êtes trompé");
+					joueurAffecte.ajouterCarte(p.retirerQuatreDernieresCartes(t));
+					joueurAffecte.ajouterCarte(p.retirerDeuxDernieresCartes(t));
+					joueurAffecte.passerSonTour(null);
+				}
 			}
 			
 		}

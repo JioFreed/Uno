@@ -210,9 +210,6 @@ public class Manche {
 					this.jouerCarte(cartePiochee);
 				}
 			}
-			else if (choix == 2)
-				this.joueurCourant.passerSonTour(this.talon);
-
 			else if (choix == 0) {
 				int str = this.joueurCourant.choisirCarte(this.talon,this.joueurCourant,this.choixJoueur());
 				this.carteCourante = this.joueurCourant.getCarteChoisie(str);
@@ -234,7 +231,7 @@ public class Manche {
 	}
 
 	public void getRefairePioche() {
-		if (this.pioche.listeCarte.size() < 6)
+		if (this.pioche.listeCarte.isEmpty())
 			refairePioche = true;
 	}
 

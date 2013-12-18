@@ -1,6 +1,7 @@
 package Modele;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import Modele.Carte;
 import Modele.TasCartes;

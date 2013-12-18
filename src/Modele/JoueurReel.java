@@ -47,15 +47,28 @@ public class JoueurReel extends Joueur{
 	public int choisirAction(Talon t,Joueur j, Joueur j2)
 	{
 		int choix = -1;
-		while (choix != 0 && choix != 1 && choix != 2) {
+		while (choix != 0 && choix != 1) {
 			Scanner sc = new Scanner(System.in);
-			System.out.println(this.getNom()+ " Veuillez choisir une action  : [0 - Jouer] [1- Piocher] [2- Passer son tour]");
+			if(j.carteJouable(t))
+				System.out.println(this.getNom()+ " Veuillez choisir une action  : [0 - Jouer] [1- Piocher]");
+			else
+				System.out.println(this.getNom()+ " Veuillez choisir une action  : [1- Piocher]");
 			choix = sc.nextInt();
 		}
 		return choix;		
 	}
 	@Override
 	public boolean douter() {
+		int choix = -1;
+		while (choix != 0 && choix != 1) {
+			Scanner sc = new Scanner(System.in);
+			System.out.println(this.getNom()+ " Voulez vous verifier la validité du coup?  : [0 - Oui] [1- Non]");
+			choix = sc.nextInt();
+		}
+		if (choix == 0)
+			return true;
+		else if(choix == 1)
+			return false;
 		return true;
 	}
 	

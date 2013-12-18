@@ -13,10 +13,20 @@ public class Pioche extends TasCartes {
 	public void melangerCarte(){
 		Collections.shuffle(super.listeCarte);
 	}
-	public ArrayList<Carte> retirerDeuxDernieresCartes()
+	
+	public void refairePioche(Talon t) {
+		Carte derniereCarteTalon = t.retirerDerniereCarte();
+		t.viderDans(this);
+		Collections.shuffle(this.listeCarte);
+		t.ajouterCarte(derniereCarteTalon);
+		}
+	
+	public ArrayList<Carte> retirerDeuxDernieresCartes(Talon t)
 	{
-		if (this.listeCarte.isEmpty())
+		if (this.listeCarte.size()< 4){
+			this.refairePioche(t);
 			return null;
+		}
 		ArrayList<Carte> liste = new ArrayList<Carte>();
 		for(int i=0;i<2;i++)
 		{
@@ -28,9 +38,9 @@ public class Pioche extends TasCartes {
 		
 	}
 	
-	public ArrayList<Carte> retirerQuatreDernieresCartes()
+	public ArrayList<Carte> retirerQuatreDernieresCartes(Talon t)
 	{
-		if (this.listeCarte.isEmpty())
+		if (this.listeCarte.size()< 6)
 			return null;
 		ArrayList<Carte> liste = new ArrayList<Carte>();
 		for(int i=0;i<4;i++)
