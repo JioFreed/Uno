@@ -4,6 +4,7 @@ package Modele;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Observer;
 
 
 
@@ -82,8 +83,8 @@ public class Manche {
 	}
 
 	public void refairePioche() {
-
-		if (this.pioche.getListeCarte().size() < 10) {
+		this.getRefairePioche();
+		if (this.refairePioche) {
 			Carte derniereCarteTalon = this.talon.retirerDerniereCarte();
 			this.talon.viderDans(this.pioche);
 			Collections.shuffle(this.pioche.listeCarte);
@@ -281,7 +282,6 @@ public class Manche {
 			}
 			this.talon.listeCarte.clear();
 			this.pioche.listeCarte.clear();
-			//this.listeJoueurs = new ArrayList<Joueur>();
 		}
 	}
 			
@@ -377,6 +377,11 @@ public class Manche {
 
 	public void setJoueurs(ArrayList<Joueur> joueurs) {
 		this.joueurs = joueurs;
+	}
+
+	public void ajouterObserver(Observer o) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

@@ -2,12 +2,16 @@ package Modele;
 
 
 public class JoueurVirtuel extends Joueur {
+	
+	private String[] name= {"Pikachu", "Naruto", "Luffy", "Ichigo", "Sena"};
 	private Strategy strategy;
 	
-	public JoueurVirtuel(String nom,Strategy strategy)
+	
+	public JoueurVirtuel(Strategy strategy)
 	{
-		super(nom);
+		super("");
 		this.strategy=strategy;
+		super.setNom(this.name[(int) (Math.random()*(name.length))]);
 	}
 
 	@Override

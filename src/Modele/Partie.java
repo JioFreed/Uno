@@ -2,13 +2,25 @@ package Modele;
 
 import java.util.Scanner;
 
+import Vue.ParametrePartie;
+
 public class Partie {
+	private ParametrePartie parametres;
 	private Manche manche;
 	private boolean partieEstFinie = false;
-	public static int scoreGagnant = 10000;
+	public static int scoreGagnant = 500;
 
-	public Partie() {
+	public Partie(/* ParametrePartie parametres */) {
+		// if (parametres.parametresSontValides())
+		// {
 		manche = new Manche();
+		// this.parametres = parametres;
+		// this.manche.joueurs = parametres.getJoueurs();
+		// scoreGagnant = parametres.getScoreGagnant();
+
+		// }
+		// else
+		// System.out.println("Erreur");
 
 	}
 
@@ -33,48 +45,50 @@ public class Partie {
 			System.out.println("Veuillez choisir le nombre de joueurs : ");
 			choix = sc.nextInt();
 			for (int i = 0; i < choix; i++) {
-				System.out.println("Veuillez choisir le nom du joueur " + i + " :");
-				String nom = sc.next();
 				int j = 0;
 				while (j != 1 && j != 2) {
-					System.out.println("Veuillez choisir le type du joueur : 1 - JoueurReel  2- JoueurVirtuel");
+					System.out.println("Veuillez choisir le type du joueur "
+							+ i + " : 1 - JoueurReel  2- JoueurVirtuel");
 					j = sc.nextInt();
-					if (j == 1)
+					if (j == 1) {
+						System.out.println("Veuillez choisir le nom du joueur "
+								+ i + " :");
+						String nom = sc.next();
 						ajouterJoueur(new JoueurReel(nom));
-					else if(j==2) {
+					} else if (j == 2) {
 						int k = 0;
 						while (k != 1 && k != 2 && k != 3) {
-							System.out.println("Veuillez choisir le type du joueur virtuel : 1- Aggressif  2- Imprevisible  3- Normal");
-							k=sc.nextInt();
+							System.out
+									.println("Veuillez choisir le type du joueur virtuel : 1- Aggressif  2- Imprevisible  3- Normal");
+							k = sc.nextInt();
 							if (k == 1)
-								ajouterJoueur(new JoueurVirtuel(nom,new Aggressif()));
+								ajouterJoueur(new JoueurVirtuel(new Aggressif()));
 							else if (k == 2)
-								ajouterJoueur(new JoueurVirtuel(nom,new Imprevisible()));
-							else if(k == 3)
-								ajouterJoueur(new JoueurVirtuel(nom,new Avance()));
+								ajouterJoueur(new JoueurVirtuel(
+										new Imprevisible()));
+							else if (k == 3)
+								ajouterJoueur(new JoueurVirtuel(new Avance()));
 						}
 					}
 
 				}
 			}
 		}
-		int s=0;
-		while(s!=1 && s!=2)
-		{
-			System.out.println("le score gagnant est " +getScoreGagnant()+ " points, Voulez vous le changer ? : 1- Oui  2- Non");
-			s= sc.nextInt();
-			if(s == 1)
-			{
-				int sf=-1;
-				while(sf<0)
-				{
-					System.out.println("Définissez le nouveau score gagnant  : ");
-					sf=sc.nextInt();
+		int s = 0;
+		while (s != 1 && s != 2) {
+			System.out.println("le score gagnant est " + getScoreGagnant()
+					+ " points, Voulez vous le changer ? : 1- Oui  2- Non");
+			s = sc.nextInt();
+			if (s == 1) {
+				int sf = -1;
+				while (sf < 0) {
+					System.out
+							.println("Définissez le nouveau score gagnant  : ");
+					sf = sc.nextInt();
 				}
 				setScoreGagnant(sf);
-			
-			}
-			else if(s == 2)
+
+			} else if (s == 2)
 				continue;
 		}
 	}
@@ -91,7 +105,8 @@ public class Partie {
 				this.partieEstFinie();
 				i++;
 			} else {
-				System.out.println("Les paramètres de la partie ne sont pas valides");
+				System.out
+						.println("Les paramètres de la partie ne sont pas valides");
 				this.setPartieEstFinie(true);
 			}
 		}

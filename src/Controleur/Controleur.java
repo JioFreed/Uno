@@ -41,11 +41,11 @@ public class Controleur
 	}
 	
 	
-	/*public void ajouterObserver (Observer o)
+	public void ajouterObserver (Observer o)
 	{
 		this.partie.getManche().ajouterObserver(o);
 	}
-	*/
+	
 
 	public ArrayList<Joueur> getJoueurs ()
 	{
