@@ -25,7 +25,6 @@ public class Pioche extends TasCartes {
 	{
 		if (this.listeCarte.size()< 4){
 			this.refairePioche(t);
-			return null;
 		}
 		ArrayList<Carte> liste = new ArrayList<Carte>();
 		for(int i=0;i<2;i++)
@@ -41,7 +40,7 @@ public class Pioche extends TasCartes {
 	public ArrayList<Carte> retirerQuatreDernieresCartes(Talon t)
 	{
 		if (this.listeCarte.size()< 6)
-			return null;
+			this.refairePioche(t);
 		ArrayList<Carte> liste = new ArrayList<Carte>();
 		for(int i=0;i<4;i++)
 		{
