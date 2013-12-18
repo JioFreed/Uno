@@ -32,11 +32,16 @@ public class Manche {
 	public void remplirPioche() {
 
 		ArrayList<Carte> carte = new ArrayList<Carte>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 1; i++) {
+			carte.add(new CarteStandard(Carte.BLUE, i));
+			carte.add(new CarteStandard(Carte.RED, i));
+			carte.add(new CarteStandard(Carte.GREEN, i));
+			carte.add(new CarteStandard(Carte.YELLOW, i));
+		}
+		for (int i = 1; i < 10; i++) {
 			carte.add(new CarteStandard(Carte.BLUE, i));
 			carte.add(new CarteStandard(Carte.BLUE, i));
 			carte.add(new CarteStandard(Carte.RED, i));
-
 			carte.add(new CarteStandard(Carte.RED, i));
 			carte.add(new CarteStandard(Carte.GREEN, i));
 			carte.add(new CarteStandard(Carte.GREEN, i));
@@ -45,8 +50,7 @@ public class Manche {
 
 		}
 
-		
-		  for (int i = 0; i < 2; i++) {
+		 for (int i = 0; i < 2; i++) {
 			  carte.add(new CarteStop(Carte.BLUE));
 			  carte.add(new CarteStop(Carte.RED));
 			  carte.add(new CarteStop(Carte.GREEN)); 
@@ -55,6 +59,10 @@ public class Manche {
 			  carte.add(new	CartePlusDeux(Carte.RED));
 			  carte.add(new CartePlusDeux(Carte.GREEN));
 			  carte.add(new CartePlusDeux(Carte.YELLOW));
+			  carte.add(new CarteInverser(Carte.BLUE));
+			  carte.add(new CarteInverser(Carte.RED));
+			  carte.add(new CarteInverser(Carte.GREEN));
+			  carte.add(new CarteInverser(Carte.YELLOW));
 		 }
 		 
 
@@ -62,15 +70,6 @@ public class Manche {
 			carte.add(new CarteJoker(Carte.BLACK));
 			carte.add(new CartePlusQuatre(Carte.BLACK));
 		}
-
-		
-		  for (int i = 0; i < 2; i++) { carte.add(new
-		  CarteInverser(Carte.BLUE)); carte.add(new
-		  CarteInverser(Carte.RED));  carte.add(new
-		 CarteInverser(Carte.GREEN)); carte.add(new
-		  CarteInverser(Carte.YELLOW));
-		 
-		 }
 		 
 
 		for (int i = 0; i < carte.size(); i++) {
