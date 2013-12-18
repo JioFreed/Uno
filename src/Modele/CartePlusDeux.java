@@ -13,7 +13,7 @@ public class CartePlusDeux extends Carte{
 
 	@Override
 	public void effetCarte(Joueur joueur,Joueur joueurAffecte, Pioche p, ArrayList<Joueur> j,Talon t) {
-			joueurAffecte.ajouterCarte(p.retirerDeuxDernieresCartes());
+			joueurAffecte.ajouterCarte(p.retirerDeuxDernieresCartes(t));
 			joueurAffecte.passerSonTour(null);
 		}
 
