@@ -35,6 +35,11 @@ public class CartePlusQuatre extends Carte {
 					joueurAffecte.passerSonTour(null);
 				}
 			}
+			else
+			{
+				joueurAffecte.ajouterCarte(p.retirerQuatreDernieresCartes(t));
+				joueurAffecte.passerSonTour(null);
+			}
 			
 		}
 	}

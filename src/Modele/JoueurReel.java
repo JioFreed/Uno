@@ -30,7 +30,7 @@ public class JoueurReel extends Joueur{
 		boolean x=true;
 		while (x) {
 			Scanner sc = new Scanner(System.in);
-			System.out.println(this.getNom()+ " Veuillez choisir une carte   : "+ this.getMain());
+			System.out.println(this.getNom()+ " Veuillez choisir une carte, la première carte est la carte 0 : "+ this.getMain());
 			choix = sc.nextInt();
 			for (int i=0;i<this.getMain().size();i++)
 			{
