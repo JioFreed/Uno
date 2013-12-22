@@ -23,9 +23,8 @@ public class Pioche extends TasCartes {
 	
 	public ArrayList<Carte> retirerDeuxDernieresCartes(Talon t)
 	{
-		if (this.listeCarte.size()< 4){
+		if (this.listeCarte.size()< 4)
 			this.refairePioche(t);
-		}
 		ArrayList<Carte> liste = new ArrayList<Carte>();
 		for(int i=0;i<2;i++)
 		{

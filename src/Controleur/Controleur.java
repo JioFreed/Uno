@@ -28,12 +28,6 @@ public class Controleur
 	}
 	
 	
-	/*public void piocherCartePioche ()
-	{
-		this.partie.piocherUneCarte (true);
-	}
-	*/
-	
 	
 	public void jouerCarte (Carte c)
 	{

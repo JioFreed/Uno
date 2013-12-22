@@ -29,7 +29,7 @@ public class CartePlusQuatre extends Carte {
 					joueur.ajouterCarte(p.retirerQuatreDernieresCartes(t));
 				}
 				else{
-					System.out.println("Vous vous êtes trompé");
+					System.out.println(joueurAffecte.getNom() + "Dommage vous vous êtes trompé");
 					joueurAffecte.ajouterCarte(p.retirerQuatreDernieresCartes(t));
 					joueurAffecte.ajouterCarte(p.retirerDeuxDernieresCartes(t));
 					joueurAffecte.passerSonTour(null);
@@ -41,6 +41,11 @@ public class CartePlusQuatre extends Carte {
 				joueurAffecte.passerSonTour(null);
 			}
 			
+		}
+		else
+		{
+			joueur.ajouterCarte(p.retirerQuatreDernieresCartes(t));
+			joueur.passerSonTour(null);
 		}
 	}
 }

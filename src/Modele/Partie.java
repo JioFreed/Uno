@@ -2,26 +2,14 @@ package Modele;
 
 import java.util.Scanner;
 
-import Vue.ParametrePartie;
 
 public class Partie {
-	private ParametrePartie parametres;
 	private Manche manche;
 	private boolean partieEstFinie = false;
 	public static int scoreGagnant = 500;
 
-	public Partie(/* ParametrePartie parametres */) {
-		// if (parametres.parametresSontValides())
-		// {
+	public Partie() {
 		manche = new Manche();
-		// this.parametres = parametres;
-		// this.manche.joueurs = parametres.getJoueurs();
-		// scoreGagnant = parametres.getScoreGagnant();
-
-		// }
-		// else
-		// System.out.println("Erreur");
-
 	}
 
 	public void ajouterJoueur(Joueur j) {

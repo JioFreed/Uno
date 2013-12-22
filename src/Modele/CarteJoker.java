@@ -13,12 +13,17 @@ public class CarteJoker extends Carte {
 		int choix = joueur.choisirCouleur(t,joueur,joueurAffecte);
 		if (choix == 0)
 			this.setCouleur(RED);
-		if (choix == 1)
+		else if (choix == 1)
 			this.setCouleur(BLUE);
-		if (choix == 2)
+		else if (choix == 2)
 			this.setCouleur(YELLOW);
-		if (choix == 3)
+		else if (choix == 3)
 			this.setCouleur(GREEN);
+		
+		if(t.listeCarte.size() == 1)
+			joueur.passerSonTour(null);
+			
 	}
+	
 
 }

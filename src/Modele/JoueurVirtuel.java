@@ -1,20 +1,22 @@
 package Modele;
 
 
+
+
+
 public class JoueurVirtuel extends Joueur {
 	
-	private String[] name= {"Pikachu", "Naruto", "Luffy", "Ichigo", "Sena"};
+	private String[] name= new String [] {"Naruto", "Luffy", "Ichigo", "Captain America","Obama","Krytos","Wolverine",
+			"Dr Who","Messi","Barney","SpiderMan","Batman","Arrow","Spielberg","Stephen Hawking","Zeus","Iron Man"};
 	private Strategy strategy;
-	
 	
 	public JoueurVirtuel(Strategy strategy)
 	{
 		super("");
 		this.strategy=strategy;
-		super.setNom(this.name[(int) (Math.random()*(name.length))]);
+		super.setNom(this.name[((int) (Math.random()*(this.name.length)))]);
 	}
 
-	@Override
 	public void passerSonTour(Talon t) {
 		this.setPeutJouer(false);
 		
@@ -27,7 +29,6 @@ public class JoueurVirtuel extends Joueur {
 
 	@Override
 	public int choisirCarte(Talon t, Joueur j, Joueur j2) {
-		// TODO Auto-generated method stub
 		return strategy.choisirCarte(t, j,j2);
 	}
 
@@ -41,7 +42,6 @@ public class JoueurVirtuel extends Joueur {
 
 	@Override
 	public int choisirAction(Talon t, Joueur j, Joueur j2) {
-		// TODO Auto-generated method stub
 		return strategy.choisirAction(t, j,j2);
 	}
 
