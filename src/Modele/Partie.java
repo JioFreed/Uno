@@ -1,103 +1,27 @@
 package Modele;
 
 import java.util.Scanner;
-
+import Vue.*;
 
 public class Partie {
+	private ParametrePartie parametres;
 	private Manche manche;
 	private boolean partieEstFinie = false;
 	public static int scoreGagnant = 500;
 
-	public Partie() {
+	public Partie(ParametrePartie p) {
+		this.parametres = p;
+		scoreGagnant = p.getScoreGagnant();
 		manche = new Manche();
+		this.manche.joueurs=p.getJoueurs();
 	}
 
 	public void ajouterJoueur(Joueur j) {
 		manche.ajouterJoueur(j);
 	}
 
-	public void affichageDebutPartie() {
-		System.out
-				.println("**************************************************************************\n"
-						+ "******                                                              ******\n"
-						+ "******                        Bienvenue                             ******\n"
-						+ "******                           Uno                                ******\n"
-						+ "******                                                              ******\n"
-						+ "**************************************************************************");
-	}
-
-	public void parametrePartie() {
-		int choix = 0;
-		Scanner sc = new Scanner(System.in);
-		while (choix < 1) {
-			System.out.println("Veuillez choisir le nombre de joueurs : ");
-			choix = sc.nextInt();
-			for (int i = 0; i < choix; i++) {
-				int j = 0;
-				while (j != 1 && j != 2) {
-					System.out.println("Veuillez choisir le type du joueur "
-							+ i + " : 1 - JoueurReel  2- JoueurVirtuel");
-					j = sc.nextInt();
-					if (j == 1) {
-						System.out.println("Veuillez choisir le nom du joueur "
-								+ i + " :");
-						String nom = sc.next();
-						ajouterJoueur(new JoueurReel(nom));
-					} else if (j == 2) {
-						int k = 0;
-						while (k != 1 && k != 2 && k != 3) {
-							System.out
-									.println("Veuillez choisir le type du joueur virtuel : 1- Aggressif  2- Imprevisible  3- Normal");
-							k = sc.nextInt();
-							if (k == 1)
-								ajouterJoueur(new JoueurVirtuel(new Aggressif()));
-							else if (k == 2)
-								ajouterJoueur(new JoueurVirtuel(
-										new Imprevisible()));
-							else if (k == 3)
-								ajouterJoueur(new JoueurVirtuel(new Avance()));
-						}
-					}
-
-				}
-			}
-		}
-		int s = 0;
-		while (s != 1 && s != 2) {
-			System.out.println("le score gagnant est " + getScoreGagnant()
-					+ " points, Voulez vous le changer ? : 1- Oui  2- Non");
-			s = sc.nextInt();
-			if (s == 1) {
-				int sf = -1;
-				while (sf < 0) {
-					System.out
-							.println("Définissez le nouveau score gagnant  : ");
-					sf = sc.nextInt();
-				}
-				setScoreGagnant(sf);
-
-			} else if (s == 2)
-				continue;
-		}
-	}
-
 	public void demarerPartie() {
-		this.affichageDebutPartie();
-		this.parametrePartie();
-		this.partieEstFinie();
-		int i = 1;
-		while (!partieEstFinie) {
-			if (VerificationParametrePartie()) {
-				System.out.println("Début de la Manche " + i + " :");
-				manche.commencerPartie();
-				this.partieEstFinie();
-				i++;
-			} else {
-				System.out
-						.println("Les paramètres de la partie ne sont pas valides");
-				this.setPartieEstFinie(true);
-			}
-		}
+		manche.commencerPartie();
 	}
 
 	public Manche getManche() {
@@ -106,12 +30,6 @@ public class Partie {
 
 	public void setManche(Manche manche) {
 		this.manche = manche;
-	}
-
-	public boolean VerificationParametrePartie() {
-		return manche.joueurs.size() >= 2 && manche.joueurs.size() <= 7 ? true
-				: false;
-
 	}
 
 	public void partieEstFinie() {

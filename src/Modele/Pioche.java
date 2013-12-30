@@ -2,16 +2,33 @@ package Modele;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Observer;
+
+import Modele.Carte;
 
 
-public class Pioche extends TasCartes {
-
+public class Pioche extends TasCartes{
+	private boolean piochable;
 	public Pioche(){
 		super();
+		piochable=true;
 	}
 	
+	public boolean isPiochable() {
+		return piochable;
+	}
+
+	public void setPiochable(boolean piochable) {
+		if (this.piochable != piochable)
+		{
+			this.piochable = piochable;
+				super.setChanged();
+		}
+	}
+
 	public void melangerCarte(){
 		Collections.shuffle(super.listeCarte);
+		super.setChanged();
 	}
 	
 	public void refairePioche(Talon t) {
@@ -49,5 +66,24 @@ public class Pioche extends TasCartes {
 		
 		return liste;
 		
+	}
+	public void ajouterCarte(Carte c){
+		super.listeCarte.add(0, c);
+		super.setChanged();
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	
+	/* (non-Javadoc)
+	 * @see Modèle.TasCartes#notifierObservers()
+	 */
+	public void notifierObservers ()
+	{
+		if (super.getListeObservers().isEmpty())
+			return;
+		for (Observer observerCourant : super.getListeObservers())
+			observerCourant.update(this, null);
 	}
 }

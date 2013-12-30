@@ -2,6 +2,8 @@ package Modele;
 
 import java.util.ArrayList;
 
+import Vue.Images;
+
 public class CartePlusQuatre extends Carte {
 
 	public CartePlusQuatre(int couleur) {
@@ -47,6 +49,12 @@ public class CartePlusQuatre extends Carte {
 			joueur.ajouterCarte(p.retirerQuatreDernieresCartes(t));
 			joueur.passerSonTour(null);
 		}
+	}
+
+	@Override
+	public String getImageAssociee() {
+		// TODO Auto-generated method stub
+		return Images.plusFour;
 	}
 }
 

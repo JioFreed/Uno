@@ -2,6 +2,8 @@ package Modele;
 
 import java.util.ArrayList;
 
+import Vue.Images;
+
 public class CarteJoker extends Carte {
 
 	public CarteJoker(int couleur) {
@@ -23,6 +25,11 @@ public class CarteJoker extends Carte {
 		if(t.listeCarte.size() == 1)
 			joueur.passerSonTour(null);
 			
+	}
+
+	@Override
+	public String getImageAssociee() {
+		return Images.joker;
 	}
 	
 

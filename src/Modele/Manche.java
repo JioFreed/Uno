@@ -4,6 +4,7 @@ package Modele;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Observable;
 import java.util.Observer;
 
 
@@ -14,7 +15,7 @@ import Modele.Joueur;
 import Modele.Pioche;
 import Modele.TasCartes;
 
-public class Manche {
+public class Manche extends Observable{
 	final static Color[] COULEURS = { Color.RED, Color.YELLOW, Color.BLUE,
 			Color.GREEN };
 
@@ -28,7 +29,29 @@ public class Manche {
 	private boolean mancheEstFinie;
 	private boolean refairePioche = false;
 	public int score=0;
+	private boolean uno =false;
+	private boolean joueurReelExistant=false;
+	private Joueur joueurGagnant;
+	private ArrayList<Observer> listeObservers = new ArrayList<Observer>();
+	
+	public Manche() {
+		//this.joueurs = new ArrayList<Joueur>();
+		this.carteCourante=null;
+		this.joueurCourant=null;
+		this.joueurSuivant=null;
+		this.mancheEstFinie = false;
 
+	}
+	
+	public void setJoueurReelExistant(boolean joueur)
+	{
+		this.joueurReelExistant= joueur;
+		this.setChanged();
+	}
+	public boolean getJoueurReelExistant()
+	{
+		return this.joueurReelExistant;
+	}
 	public void remplirPioche() {
 
 		ArrayList<Carte> carte = new ArrayList<Carte>();
@@ -80,6 +103,8 @@ public class Manche {
 	public void ajouterJoueur(Joueur j) {
 		this.joueurs.add(j);
 	}
+	
+	
 
 	public void refairePioche() {
 		this.getRefairePioche();
@@ -157,13 +182,43 @@ public class Manche {
 		this.mancheEstFinie = false;
 		this.joueurCourant = this.joueurs.get(0);
 		this.joueurSuivant = this.joueurCourant;
-		if (!(this.talon.getDerniereCarte() instanceof CarteInverser)) 
+		this.joueurCourant.setEstJoueurActuel(true);
+		if(! (this.talon.getDerniereCarte() instanceof CarteInverser))
 			this.talon.getDerniereCarte().effetCarte(this.joueurCourant, this.joueurCourant, this.pioche, this.joueurs,this.talon);
-		else{
-			Collections.reverse(this.joueurs);
-			this.joueurSuivant = this.joueurs.get(0);
+		else
+		{
+			this.talon.getDerniereCarte().effetCarte(this.joueurCourant, this.joueurCourant, this.pioche, this.joueurs,this.talon);
+			this.mancheSuivante();
 		}
 		this.mancheSuivante();
+		
+	}
+	public void piocherCarte()
+	{
+		this.joueurCourant.ajouterCarte(this.pioche.retirerDerniereCarte());
+		this.joueurCourant.setAPiocher(true);
+		this.pioche.setPiochable(false);
+	}
+
+	public ArrayList<Observer> getListeObservers() {
+		return listeObservers;
+	}
+
+	public void setListeObservers(ArrayList<Observer> listeObservers) {
+		this.listeObservers = listeObservers;
+	}
+	
+	public void setCarteActuelle(Carte c)
+	{
+		if (c == null)
+			return ;
+		
+		this.carteCourante = c;	
+		
+		if(this.talon.getDerniereCarte().comparerCarte(this.carteCourante))
+			this.joueurCourant.setaUneCarteJouable(true);
+		else
+			this.joueurCourant.setaUneCarteJouable(false);
 
 	}
 
@@ -184,10 +239,12 @@ public class Manche {
 
 	public void mancheSuivante() {
 		this.mancheEstFinie();
-		while (!this.mancheEstFinie) {
+		if (!this.mancheEstFinie) {
 			this.getRefairePioche();
 			if (refairePioche)
 				this.refairePioche();
+			this.pioche.setPiochable(true);
+			this.joueurCourant.setAPiocher(false);
 			this.joueurCourant=this.joueurSuivant;
 			if (this.joueurSuivant.isPeutJouer())
 				this.joueurCourant=this.joueurSuivant;
@@ -196,40 +253,52 @@ public class Manche {
 				this.joueurCourant.setPeutJouer(true);
 				this.joueurCourant=this.choixJoueur();
 			}
-			System.out.println("le talon : " + this.talon.getDerniereCarte());
-			System.out.println(this.joueurCourant.getNom()+ " a les cartes suivantes : "+ this.joueurCourant.getMain());
-
-			int choix = this.joueurCourant.choisirAction(this.talon,this.joueurCourant,this.choixJoueur());
-			if (choix == 1)
-			{
-				Carte cartePiochee = this.pioche.retirerDerniereCarte();
-				this.joueurCourant.ajouterCarte(cartePiochee);
-				if(this.talon.getDerniereCarte().comparerCarte(cartePiochee))
-				{
-					System.out.println(this.joueurCourant.getNom() + " a les cartes suivantes : " +this.joueurCourant.getMain());
-					this.jouerCarte(cartePiochee);
-				}
-			}
-			else if (choix == 0) {
-				int str = this.joueurCourant.choisirCarte(this.talon,this.joueurCourant,this.choixJoueur());
-				this.carteCourante = this.joueurCourant.getCarteChoisie(str);
-
-				while (!this.talon.getDerniereCarte().comparerCarte(
-						this.carteCourante)) {
-					int str1 = this.joueurCourant.choisirCarte(this.talon,this.joueurCourant,this.choixJoueur());
-					this.carteCourante = this.joueurCourant
-							.getCarteChoisie(str1);
-					str = str1;
-				}
-				this.carteCourante = this.joueurCourant.getCarteChoisie(str);
-				this.jouerCarte(this.carteCourante);
-			}
+			for(Joueur joueur : joueurs)
+				joueur.setEstJoueurActuel(false);
+			this.joueurCourant.setEstJoueurActuel(true);
+			
 			this.choixJoueur();
-			this.mancheSuivante();
+			if(this.joueurCourant instanceof JoueurVirtuel)
+			{
+				int choix = this.joueurCourant.choisirAction(this.talon,this.joueurCourant,this.choixJoueur());
+                if (choix == 1)
+                {
+                       	this.piocherCarte();
+                       	this.carteCourante= this.joueurCourant.getMain().get(0);
+                        if(this.talon.getDerniereCarte().comparerCarte(this.carteCourante))
+                        {
+                                System.out.println(this.joueurCourant.getNom() + " a les cartes suivantes : " +this.joueurCourant.getMain());
+                                this.jouerCarte();
+                        }
+                        else
+                        	this.passerTour();
+                }
+                else if (choix == 0) {
+                        int str = this.joueurCourant.choisirCarte(this.talon,this.joueurCourant,this.choixJoueur());
+                        this.carteCourante = this.joueurCourant.getCarteChoisie(str);
+
+                        while (!this.talon.getDerniereCarte().comparerCarte(this.carteCourante)) {
+                                int str1 = this.joueurCourant.choisirCarte(this.talon,this.joueurCourant,this.choixJoueur());
+                                this.carteCourante = this.joueurCourant .getCarteChoisie(str1);
+                                str = str1;
+                        }
+                        this.carteCourante = this.joueurCourant.getCarteChoisie(str);
+                        this.jouerCarte();
+                }
+			}
+			
 		}
 
 	}
-
+	public void permettreDePiocher ()
+	{
+		this.pioche.setPiochable(true);
+	}
+	
+	public void passerTour()
+	{
+		this.mancheSuivante();
+	}
 	public void getRefairePioche() {
 		if (this.pioche.listeCarte.isEmpty())
 			refairePioche = true;
@@ -241,17 +310,35 @@ public class Manche {
 		if (this.joueurCourant.getMain().size() == 1)
 			this.setUno();
 		c.effetCarte(this.joueurCourant,this.choixJoueur(), this.pioche, this.joueurs,this.talon);
-		
-
-		
+		this.mancheSuivante();
+	}
+	public void jouerCarte(Joueur j) {
+		this.joueurCourant.retirerCarteMain(this.carteCourante);
+		this.talon.ajouterCarte(this.carteCourante);
+		if (this.joueurCourant.getMain().size() == 1)
+			this.setUno();
+		this.carteCourante.effetCarte(this.joueurCourant,this.choixJoueur(), this.pioche, this.joueurs,this.talon);
+		this.mancheSuivante();
 	}
 
+	public void jouerCarte()
+	{
+		this.joueurCourant.retirerCarteMain(this.carteCourante);
+		this.talon.ajouterCarte(this.carteCourante);
+		if (this.joueurCourant.getMain().size() == 1)
+			this.setUno();
+		this.carteCourante.effetCarte(this.joueurCourant,this.choixJoueur(), this.pioche, this.joueurs,this.talon);
+		if (this.carteCourante instanceof CarteInverser)
+			this.choixJoueur();
+		this.mancheSuivante();
+	}
 	public void mancheEstFinie() {
 		if (!this.mancheEstFinie) {
 			for (Joueur joueurCourant : this.joueurs) {
 				if (joueurCourant.getMain().isEmpty()) {
 					score=0;
-					this.mancheEstFinie = true;				
+					
+					//this.mancheEstFinie = true;				
 					for (Joueur joueurCourant2 : this.joueurs)
 					{
 						for(int i=0;i<joueurCourant2.main.size();i++)
@@ -261,6 +348,8 @@ public class Manche {
 					}
 					joueurCourant.setScore(score);
 					System.out.println(joueurCourant.getNom()+ " a gagné la Manche avec " + this.score);
+					this.setJoueurGagnant(joueurCourant);
+					this.setMancheEstFinie(true);
 					break;
 				
 				}
@@ -280,7 +369,16 @@ public class Manche {
 			this.pioche.listeCarte.clear();
 		}
 	}
-			
+	
+	public void setJoueurGagnant(Joueur j)
+	{
+		this.joueurGagnant = j;
+	}
+	
+	public Joueur getJoueurGagnant2()
+	{
+		return this.joueurGagnant;
+	}
 	public int getScoreTotal()
 	{
 		int max=0;
@@ -302,16 +400,17 @@ public class Manche {
 		return null;
 	}
 
-	public Manche() {
-		this.joueurs = new ArrayList<Joueur>();
-		this.mancheEstFinie = false;
-
-	}
-
 	public void setUno()
 	{
+		this.uno=true;
+		this.setChanged();
 		System.out.println(this.joueurCourant.getNom() + " UNO !!!! ");
 	}
+	public boolean getUno()
+	{
+		return this.uno;
+	}
+
 	public Joueur getJoueurCourant() {
 		return joueurCourant;
 	}
@@ -366,6 +465,7 @@ public class Manche {
 
 	public void setMancheEstFinie(boolean mancheEstFinie) {
 		this.mancheEstFinie = mancheEstFinie;
+		this.setChanged();
 	}
 	public ArrayList<Joueur> getJoueurs() {
 		return joueurs;
@@ -375,9 +475,28 @@ public class Manche {
 		this.joueurs = joueurs;
 	}
 
-	public void ajouterObserver(Observer o) {
-		// TODO Auto-generated method stub
-		
+	public void ajouterObserver (Observer observer)
+	{
+		this.listeObservers.add(observer);
+	}
+	
+	/**
+	 * Méthode pour notifier les observers
+	 */
+	public void notifierObservers (boolean nvlePioche)
+	{
+		for (Observer observerCourant : this.listeObservers)
+			observerCourant.update(this, nvlePioche);
+	}
+	
+	public void setChanged ()
+	{
+		this.notifierObservers(false);
+	}
+	
+	public void setChangedNouvellePioche ()
+	{
+		this.notifierObservers(true);
 	}
 }
 

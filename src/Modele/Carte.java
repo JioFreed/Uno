@@ -96,6 +96,7 @@ public abstract class Carte
 		return false;
 		
 	}
+	public abstract String getImageAssociee ();
 	
 
 	

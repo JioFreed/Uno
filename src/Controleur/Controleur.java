@@ -27,20 +27,37 @@ public class Controleur
 		this.partie.demarerPartie();
 	}
 	
-	
-	
+	public void setCarteActuelle(Carte c)
+	{
+		this.partie.getManche().setCarteActuelle(c);
+	}
+	public void piocherCarte()
+	{
+		this.partie.getManche().piocherCarte();
+	}
+
 	public void jouerCarte (Carte c)
 	{
 		this.partie.getManche().jouerCarte(c);
 	}
+	public void jouerCarte()
+	{
+		this.partie.getManche().jouerCarte();
+	}
 	
+	public void passerTour()
+	{
+		this.partie.getManche().passerTour();
+	}
+	public void jouerCarte (Joueur j)
+	{
+		this.partie.getManche().jouerCarte(j);
+	}
 	
 	public void ajouterObserver (Observer o)
 	{
 		this.partie.getManche().ajouterObserver(o);
 	}
-	
-
 	public ArrayList<Joueur> getJoueurs ()
 	{
 		return this.partie.getManche().getJoueurs();
@@ -55,6 +72,11 @@ public class Controleur
 	public Talon getTalon ()
 	{
 		return this.partie.getManche().getTalon();
+	}
+	
+	public Joueur getJoueurCourant()
+	{
+		return this.partie.getManche().getJoueurCourant();
 	}
 }
 
