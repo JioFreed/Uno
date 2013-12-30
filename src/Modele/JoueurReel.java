@@ -2,6 +2,8 @@ package Modele;
 
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class JoueurReel extends Joueur{
 	
 	public JoueurReel(String nom)
@@ -58,18 +60,11 @@ public class JoueurReel extends Joueur{
 		return choix;		
 	}
 	@Override
-	public boolean douter() {
-		int choix = -1;
-		while (choix != 0 && choix != 1) {
-			Scanner sc = new Scanner(System.in);
-			System.out.println(this.getNom()+ " Voulez vous verifier la validité du coup?  : [0 - Oui] [1- Non]");
-			choix = sc.nextInt();
-		}
-		if (choix == 0)
-			return true;
-		else if(choix == 1)
-			return false;
-		return true;
+	public boolean douter() {	
+		int selectedValue = JOptionPane.showConfirmDialog(null,
+			        "Voulez vous verifier le coup?", "Choisir ", JOptionPane.YES_NO_OPTION);
+		System.out.println(selectedValue);
+		return selectedValue == 0 ? true  : false ;
 	}
 	
 

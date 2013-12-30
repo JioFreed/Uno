@@ -89,7 +89,7 @@ public class Manche extends Observable{
 		 }
 		 
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 20; i++) {
 			carte.add(new CarteJoker(Carte.BLACK));
 			carte.add(new CartePlusQuatre(Carte.BLACK));
 		}
@@ -179,6 +179,11 @@ public class Manche extends Observable{
 	public void commencerPartie() {
 		this.ordonnerJoueur(this.choixDistributeur());
 		this.distribuerCartes();
+		for(Joueur j : this.joueurs)
+		{
+			if(j instanceof JoueurReel)
+				this.setJoueurReelExistant(true);
+		}
 		this.mancheEstFinie = false;
 		this.joueurCourant = this.joueurs.get(0);
 		this.joueurSuivant = this.joueurCourant;

@@ -68,7 +68,6 @@ public class FenetreParametre extends JFrame implements Observer
 	{
 		if (((Manche) arg0).isMancheEstFinie())
 		{
-			//JOptionPane d = new JOptionPane();  
 			JOptionPane.showMessageDialog(this, ((Manche) arg0).getJoueurGagnant2().getNom() + " a gagner la manche!");
 
 			System.exit(0);			

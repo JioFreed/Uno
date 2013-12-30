@@ -32,13 +32,14 @@ public class PanneauPioche extends JPanel implements Observer, ActionListener
 		pioche.ajouterObserver(this);
 		this.pioche = pioche;
 			
-		this.mettreAJourImage ();
-		this.mettreAJourBouton();
-		this.boutonPioche.setEnabled(true);
+		
+		this.boutonPioche.setEnabled(false);
 		this.boutonPioche.addActionListener(this); 
 		
 		this.add(this.labelImage, BorderLayout.NORTH);
 		this.add(this.boutonPioche, BorderLayout.NORTH);		
+		this.mettreAJourImage ();
+		this.mettreAJourBouton();
 	}
 	
 	/**

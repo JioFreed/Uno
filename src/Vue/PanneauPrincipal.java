@@ -71,7 +71,7 @@ public class PanneauPrincipal extends JPanel implements Observer
 		this.panneauJoueur = new PanneauJoueur(controleur.getJoueurCourant());
 		this.setContraintes(0, 4, 100, 1, GridBagConstraints.NORTH);
 		this.add(panneauJoueur, this.contraintes);
-		this.toutMettreAJour();
+		//this.toutMettreAJour();
 	}
 	
 	/**
@@ -126,6 +126,7 @@ public class PanneauPrincipal extends JPanel implements Observer
 		this.panneauCouleur = new PanneauCouleurTalon(talon);
 		this.setContraintes(6, 3, 1, 1, GridBagConstraints.NORTH);
 		this.add(panneauCouleur, this.contraintes);
+		this.panneauJoueur.removeAll();
 		for(Joueur j : this.joueurs)
 		{
 			if(j.isEstJoueurActuel())
@@ -135,6 +136,7 @@ public class PanneauPrincipal extends JPanel implements Observer
 				this.add(panneauJoueur, this.contraintes);
 			}
 		}
+		this.panneauJoueur.validate();
 		this.validate();
 	}
 	
