@@ -3,12 +3,14 @@ package Vue;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import Controleur.Controleur;
 import Modele.*;
@@ -19,12 +21,15 @@ public class FenetreParametre extends JFrame implements Observer
 	final static int MIN_HORIZONTAL = 1350;
 	final static int MIN_VERTICAL = 730;
 	private Controleur controleur;
+	private ArrayList<Joueur> joueur;
+	private JPanel pannelPrincipal;
 	public FenetreParametre(Controleur controleur)
 	{
 		super("Uno ");
-		
 		this.controleur = controleur;
+		this.joueur=this.controleur.getJoueurs();
 		this.controleur.ajouterObserver(this);
+		//this.controleur.choixJoueur();
 		this.controleur.demarerLaPartie();
 		
 		this.pack();
@@ -32,7 +37,8 @@ public class FenetreParametre extends JFrame implements Observer
 		this.setMinimumSize(new Dimension (MIN_HORIZONTAL,MIN_VERTICAL));
 		
 		this.setLayout(new BorderLayout());
-		this.add(new PanneauPrincipal(this.controleur), BorderLayout.CENTER);
+		this.pannelPrincipal= new PanneauPrincipal(this.controleur);
+		this.add(this.pannelPrincipal, BorderLayout.SOUTH);
 
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		this.setVisible(true);
@@ -69,9 +75,10 @@ public class FenetreParametre extends JFrame implements Observer
 		if (((Manche) arg0).isMancheEstFinie())
 		{
 			JOptionPane.showMessageDialog(this, ((Manche) arg0).getJoueurGagnant2().getNom() + " a gagner la manche!");
-
-			System.exit(0);			
+			//((Partie) arg0).demarerPartie();
+			//System.exit(0);			
 		}
+		
 		else if (((Manche) arg0).getUno() && ((Manche) arg0).getJoueurReelExistant())
 			JOptionPane.showMessageDialog(this, ((Manche) arg0).getJoueurCourant().getNom() + " déclare Uno !!");
 	}

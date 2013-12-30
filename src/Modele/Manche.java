@@ -89,7 +89,7 @@ public class Manche extends Observable{
 		 }
 		 
 
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 2; i++) {
 			carte.add(new CarteJoker(Carte.BLACK));
 			carte.add(new CartePlusQuatre(Carte.BLACK));
 		}
@@ -372,6 +372,7 @@ public class Manche extends Observable{
 			}
 			this.talon.listeCarte.clear();
 			this.pioche.listeCarte.clear();
+			this.setChanged();
 		}
 	}
 	
@@ -470,7 +471,6 @@ public class Manche extends Observable{
 
 	public void setMancheEstFinie(boolean mancheEstFinie) {
 		this.mancheEstFinie = mancheEstFinie;
-		this.setChanged();
 	}
 	public ArrayList<Joueur> getJoueurs() {
 		return joueurs;

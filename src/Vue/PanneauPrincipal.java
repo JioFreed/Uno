@@ -52,9 +52,9 @@ public class PanneauPrincipal extends JPanel implements Observer
 		this.setLayout(new GridBagLayout ());
 		this.contraintes = new GridBagConstraints ();
 		
-		//PanneauInformationsGenerales panneauGeneral = new PanneauInformationsGenerales(joueurs);
-		//this.setContraintes(0, 0, 3, 1);
-		//this.add(panneauGeneral, this.contraintes);
+		PanneauInformation panneauGeneral = new PanneauInformation(joueurs);
+		this.setContraintes(6, 0, 3, 1);
+		this.add(panneauGeneral, this.contraintes);
 		
 		this.panneauPioche = new PanneauPioche(this.pioche);
 		this.setContraintes(1, 3, 1, 1, GridBagConstraints.NORTH);
@@ -64,12 +64,10 @@ public class PanneauPrincipal extends JPanel implements Observer
 		this.setContraintes(3, 3, 1, 1, GridBagConstraints.NORTH);
 		this.add(panneauTalon, this.contraintes);
 		
-		this.panneauCouleur = new PanneauCouleurTalon(talon);
-		this.setContraintes(6, 3, 1, 1, GridBagConstraints.NORTH);
-		this.add(panneauCouleur, this.contraintes);
+		
 		
 		this.panneauJoueur = new PanneauJoueur(controleur.getJoueurCourant());
-		this.setContraintes(0, 4, 100, 1, GridBagConstraints.NORTH);
+		this.setContraintes(0, 4, 100, 1, GridBagConstraints.SOUTH);
 		this.add(panneauJoueur, this.contraintes);
 		//this.toutMettreAJour();
 	}
@@ -117,11 +115,14 @@ public class PanneauPrincipal extends JPanel implements Observer
 	public void mettreAjourJoueur()
 	{
 		this.removeAll();
+		PanneauInformation panneauGeneral = new PanneauInformation(joueurs);
+		this.setContraintes(6, 0, 3, 1);
+		this.add(panneauGeneral, this.contraintes);
 		this.panneauPioche = new PanneauPioche(pioche);
 		this.setContraintes(1, 3, 1, 1, GridBagConstraints.NORTH);
 		this.add(panneauPioche,this.contraintes);
 		this.panneauTalon = new PanneauTalon(talon);
-		this.setContraintes(3, 3, 1, 1, GridBagConstraints.CENTER);
+		this.setContraintes(3, 3, 1, 1, GridBagConstraints.NORTH);
 		this.add(panneauTalon,this.contraintes);
 		this.panneauCouleur = new PanneauCouleurTalon(talon);
 		this.setContraintes(6, 3, 1, 1, GridBagConstraints.NORTH);

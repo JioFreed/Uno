@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
@@ -47,6 +49,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener, KeyList
 	private JRadioButton boutonOui;
 	private JRadioButton boutonNon;
 	private JButton boutonValidation;
+	private Partie partie;
+	private JPanel fenetreParametre;
+	private Controleur controleur;
 	
 	public FenetrePrincipale ()
 	{
@@ -310,10 +315,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener, KeyList
 	{
 		this.setVisible(false);
 		this.dispose();
-		Partie partie = new Partie (this.parametres);
-		Controleur controleur = new Controleur (partie);
-		new FenetreParametre(controleur);
+		this.partie = new Partie (this.parametres);
+		this.controleur = new Controleur (this.partie);
+		new FenetreParametre(this.controleur);
 	
 	}
+	
 }
 

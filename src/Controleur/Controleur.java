@@ -21,6 +21,10 @@ public class Controleur
 		this.partie = partie;
 	}
 	
+	public void choixJoueur()
+	{
+		this.partie.getManche().ordonnerJoueur(this.partie.getManche().choixDistributeur());
+	}
 	
 	public void demarerLaPartie ()
 	{
@@ -57,6 +61,10 @@ public class Controleur
 	public void ajouterObserver (Observer o)
 	{
 		this.partie.getManche().ajouterObserver(o);
+	}
+	public void ajouterObserver2 (Observer o)
+	{
+		this.partie.ajouterObserver(o);
 	}
 	public ArrayList<Joueur> getJoueurs ()
 	{
