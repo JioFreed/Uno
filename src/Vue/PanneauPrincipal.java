@@ -69,7 +69,7 @@ public class PanneauPrincipal extends JPanel implements Observer
 		this.panneauJoueur = new PanneauJoueur(controleur.getJoueurCourant());
 		this.setContraintes(0, 4, 100, 1, GridBagConstraints.SOUTH);
 		this.add(panneauJoueur, this.contraintes);
-		//this.toutMettreAJour();
+		this.toutMettreAJour();
 	}
 	
 	/**

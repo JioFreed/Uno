@@ -215,16 +215,13 @@ public class Manche extends Observable{
 	
 	public void setCarteActuelle(Carte c)
 	{
-		if (c == null)
-			return ;
 		
-		this.carteCourante = c;	
-		
-		if(this.talon.getDerniereCarte().comparerCarte(this.carteCourante))
+		if(this.talon.getDerniereCarte().comparerCarte(c))
 			this.joueurCourant.setaUneCarteJouable(true);
 		else
 			this.joueurCourant.setaUneCarteJouable(false);
-
+		this.carteCourante = c;	
+		
 	}
 
 	public Joueur choixJoueur() {

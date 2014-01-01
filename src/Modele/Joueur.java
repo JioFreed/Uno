@@ -44,7 +44,11 @@ public abstract class Joueur extends Observable {
 	
 	public void setAPiocher(boolean x)
 	{
-		this.aPiocher= x;
+		if(this.aPiocher != x)
+		{
+			this.aPiocher= x;
+			this.setChanged();
+		}
 	}
 	public void ajouterObserver (Observer observer)
 	{
@@ -196,8 +200,14 @@ public abstract class Joueur extends Observable {
 	}
 
 	public void setaUneCarteJouable(boolean aUneCarteJouable) {
-		this.aUneCarteJouable = aUneCarteJouable;
-		this.setChanged();
+		if (this.aUneCarteJouable  !=  aUneCarteJouable)
+		{
+			this.aUneCarteJouable = aUneCarteJouable;
+			this.setChanged();
+		}
+		
+		
+		
 	}
 
 	public abstract boolean douter();

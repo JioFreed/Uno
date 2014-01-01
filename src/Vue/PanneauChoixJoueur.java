@@ -6,6 +6,7 @@ import javax.swing.border.TitledBorder;
 
 import Modele.Joueur;
 
+
 public class PanneauChoixJoueur extends JLabel {
 	private ImageIcon image;
 	private TitledBorder titre;
