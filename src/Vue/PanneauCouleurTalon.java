@@ -30,15 +30,19 @@ public class PanneauCouleurTalon extends JPanel implements Observer {
 	 * Met à jour l'image de la dernière carte de la défausse
 	 */
 	public void mettreAJourImage() {
-		int couleur = this.talon.getDerniereCarte().getCouleur();
-		if(couleur == 1 )
-			this.labelImage.setIcon(Images.redimensionnerMax(Images.red));
-		else if(couleur ==2)
-			this.labelImage.setIcon(Images.redimensionnerMax(Images.green));
-		else if(couleur ==3)
-			this.labelImage.setIcon(Images.redimensionnerMax(Images.blue));
-		else if(couleur == 4)
-			this.labelImage.setIcon(Images.redimensionnerMax(Images.jaune));
+		if (this.talon.getListeCarte().isEmpty())
+			this.labelImage.setIcon(Images.redimensionnerMax(Images.CACHEE));
+		else {
+			int couleur = this.talon.getDerniereCarte().getCouleur();
+			if (couleur == 1)
+				this.labelImage.setIcon(Images.redimensionnerMax(Images.red));
+			else if (couleur == 2)
+				this.labelImage.setIcon(Images.redimensionnerMax(Images.green));
+			else if (couleur == 3)
+				this.labelImage.setIcon(Images.redimensionnerMax(Images.blue));
+			else if (couleur == 4)
+				this.labelImage.setIcon(Images.redimensionnerMax(Images.jaune));
+		}
 	}
 
 	public void update(Observable o, Object arg) {

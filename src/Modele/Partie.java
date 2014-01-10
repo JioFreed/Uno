@@ -7,18 +7,34 @@ import java.util.Scanner;
 import Vue.*;
 
 public class Partie extends Observable{
-	private ParametrePartie parametres;
 	private Manche manche;
-	private boolean partieEstFinie = false;
+	public static boolean partieEstFinie = false;
 	public static int scoreGagnant = 500;
+	public boolean nextRound= false;
+
 	public ArrayList<Observer> listeObservers = new ArrayList<Observer>();
 
 	public Partie(ParametrePartie p) {
-		this.parametres = p;
 		scoreGagnant = p.getScoreGagnant();
 		manche = new Manche();
 		this.manche.joueurs=p.getJoueurs();
 	}
+	public boolean isNextRound() {
+		return nextRound;
+	}
+	public void init()
+	{
+		this.manche.setMancheEstFinie(false);
+		this.manche.setUno(false);
+		this.manche.setJoueurCourant(null);
+		this.manche.setCarteCourante(null);
+	}
+
+	public void setNextRound(boolean nextRoun) {
+		nextRound = nextRoun;
+		this.setChanged();
+	}
+
 
 	public void ajouterJoueur(Joueur j) {
 		manche.ajouterJoueur(j);
@@ -30,12 +46,7 @@ public class Partie extends Observable{
 	
 
 	public void demarerPartie() {
-		this.partieEstFinie();
-		if(!this.partieEstFinie)
-		{
-			manche.commencerPartie();
-			this.partieEstFinie();
-		}
+		manche.commencerPartie();
 	}
 
 	public Manche getManche() {
@@ -46,23 +57,12 @@ public class Partie extends Observable{
 		this.manche = manche;
 	}
 
-	public void partieEstFinie() {
-		if (!this.partieEstFinie) {
-			if (this.manche.getScoreTotal() >= getScoreGagnant()) {
-				this.partieEstFinie = true;
-				System.out.println(this.manche.getJoueurGagnant().getNom()
-						+ " a gagné la partie ");
-				this.setChanged();
-			}
-		}
-	}
-
 	public boolean isPartieEstFinie() {
 		return partieEstFinie;
 	}
 
-	public void setPartieEstFinie(boolean partieEstFinie) {
-		this.partieEstFinie = partieEstFinie;
+	public void setPartieEstFinie(boolean partieEstFini) {
+		partieEstFinie = partieEstFini;
 	}
 
 	public static int getScoreGagnant() {
@@ -72,15 +72,6 @@ public class Partie extends Observable{
 	public static void setScoreGagnant(int scoreGagnant) {
 		Partie.scoreGagnant = scoreGagnant;
 	}
-	public void notifierObservers (boolean nvlePioche)
-	{
-		for (Observer observerCourant : this.listeObservers)
-			observerCourant.update(this, nvlePioche);
-	}
-	
-	public void setChanged ()
-	{
-		this.notifierObservers(false);
-	}
+
 
 }

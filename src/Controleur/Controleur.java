@@ -40,10 +40,7 @@ public class Controleur
 		this.partie.getManche().piocherCarte();
 	}
 
-	public void jouerCarte (Carte c)
-	{
-		this.partie.getManche().jouerCarte(c);
-	}
+
 	public void jouerCarte()
 	{
 		this.partie.getManche().jouerCarte();
@@ -53,9 +50,9 @@ public class Controleur
 	{
 		this.partie.getManche().passerTour();
 	}
-	public void jouerCarte (Joueur j)
+	public void init()
 	{
-		this.partie.getManche().jouerCarte(j);
+		this.partie.init();
 	}
 	
 	public void ajouterObserver (Observer o)

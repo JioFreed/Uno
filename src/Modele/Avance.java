@@ -28,7 +28,7 @@ public class Avance implements Strategy {
 	}
 	@Override
 	public boolean douter() {
-		return true;
+		return  ((int)(Math.random() * (8-0))) > 4 ? true : false;
 	}
 	public int jouerCarte4(Talon t,Joueur j)
 	{

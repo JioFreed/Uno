@@ -8,21 +8,24 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.Box;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Controleur.Controleur;
 import Modele.Joueur;
+import Modele.Manche;
+import Modele.Partie;
 import Modele.Talon;
 import Modele.Pioche;
 
 /**
- * Panel principal de la FenetrePrincipale. Gère le positionnement de tous les panels internes.
+ * Panel principal de la FenetrePrincipale. Gère le positionnement de tous les
+ * panels internes.
  * 
  * @author Yann, Youssef
- *
+ * 
  */
-public class PanneauPrincipal extends JPanel implements Observer
-{
+public class PanneauPrincipal extends JPanel implements Observer {
 	/**
 	 * Contraintes pour le GridBagLayout
 	 */
@@ -34,105 +37,95 @@ public class PanneauPrincipal extends JPanel implements Observer
 	private JPanel panneauPioche;
 	private JPanel panneauTalon;
 	private JPanel panneauCouleur;
+	private Controleur controleur;
+
 	/**
 	 * Crée et initiliase le panel principal de la FenetrePrincipale
 	 * 
 	 * @param controleur
+	 * @throws InterruptedException
 	 */
-	public PanneauPrincipal (Controleur controleur)
-	{
+	public PanneauPrincipal(Controleur controleur) {
 		super();
 
 		this.joueurs = controleur.getJoueurs();
-		for(Joueur j : joueurs)
+		for (Joueur j : joueurs)
 			j.ajouterObserver(this);
-		this.pioche=controleur.getPioche();
-		this.talon=controleur.getTalon();
-		
-		this.setLayout(new GridBagLayout ());
-		this.contraintes = new GridBagConstraints ();
-		
-		PanneauInformation panneauGeneral = new PanneauInformation(joueurs);
-		this.setContraintes(6, 0, 3, 1);
-		this.add(panneauGeneral, this.contraintes);
-		
-		this.panneauPioche = new PanneauPioche(this.pioche);
-		this.setContraintes(1, 3, 1, 1, GridBagConstraints.NORTH);
-		this.add(panneauPioche, this.contraintes);
-		
-		this.panneauTalon = new PanneauTalon(this.talon);
-		this.setContraintes(3, 3, 1, 1, GridBagConstraints.NORTH);
-		this.add(panneauTalon, this.contraintes);
-		
-		
-		
-		this.panneauJoueur = new PanneauJoueur(controleur.getJoueurCourant());
-		this.setContraintes(0, 4, 100, 1, GridBagConstraints.SOUTH);
-		this.add(panneauJoueur, this.contraintes);
+		this.controleur = controleur;
+		this.controleur.ajouterObserver(this);
+		this.pioche = controleur.getPioche();
+		this.talon = controleur.getTalon();
+
+		this.setLayout(new GridBagLayout());
+		this.contraintes = new GridBagConstraints();
+		for (Joueur j : this.joueurs) {
+			if (j.isEstJoueurActuel()) {
+				this.panneauJoueur = new PanneauJoueur(j);
+				this.setContraintes(0, 4, 100, 1, GridBagConstraints.SOUTH);
+				this.add(panneauJoueur, this.contraintes);
+			}
+		}
+
 		this.toutMettreAJour();
 	}
-	
+
 	/**
 	 * Change les contraintes du GridBagLayout
 	 * 
 	 * @param xDebut
-	 * 			Indice horizontal de début
+	 *            Indice horizontal de début
 	 * @param yDebut
-	 * 			Indice vertical de début
+	 *            Indice vertical de début
 	 * @param xTaille
-	 * 			Indice de la taille horizontale
+	 *            Indice de la taille horizontale
 	 * @param yTaille
-	 * 			Indice de la taille verticale
+	 *            Indice de la taille verticale
 	 */
-	public void setContraintes (int xDebut, int yDebut, int xTaille, int yTaille)
-	{
+	public void setContraintes(int xDebut, int yDebut, int xTaille, int yTaille) {
 		this.contraintes.gridx = xDebut;
 		this.contraintes.gridy = yDebut;
-		this.contraintes.gridwidth= xTaille;
+		this.contraintes.gridwidth = xTaille;
 		this.contraintes.gridheight = yTaille;
 	}
-	
+
 	/**
 	 * Change les contraintes du GridBagLayout
 	 * 
 	 * @param xDebut
-	 * 			Indice horizontal de début
+	 *            Indice horizontal de début
 	 * @param yDebut
-	 * 			Indice vertical de début
+	 *            Indice vertical de début
 	 * @param xTaille
-	 * 			Indice de la taille horizontale
+	 *            Indice de la taille horizontale
 	 * @param yTaille
-	 * 			Indice de la taille verticale
+	 *            Indice de la taille verticale
 	 * @param positionInitiale
-	 * 			Position initiale où le composant doit être placé
+	 *            Position initiale où le composant doit être placé
 	 */
-	public void setContraintes (int xDebut, int yDebut, int xTaille, int yTaille, int positionInitiale)
-	{
+	public void setContraintes(int xDebut, int yDebut, int xTaille,
+			int yTaille, int positionInitiale) {
 		this.setContraintes(xDebut, yDebut, xTaille, yTaille);
 		this.contraintes.anchor = positionInitiale;
 	}
 
-	public void mettreAjourJoueur()
-	{
+	public void mettreAjourJoueur() {
 		this.removeAll();
 		PanneauInformation panneauGeneral = new PanneauInformation(joueurs);
 		this.setContraintes(6, 0, 3, 1);
 		this.add(panneauGeneral, this.contraintes);
 		this.panneauPioche = new PanneauPioche(pioche);
 		this.setContraintes(1, 3, 1, 1, GridBagConstraints.NORTH);
-		this.add(panneauPioche,this.contraintes);
+		this.add(panneauPioche, this.contraintes);
 		this.panneauTalon = new PanneauTalon(talon);
 		this.setContraintes(3, 3, 1, 1, GridBagConstraints.NORTH);
-		this.add(panneauTalon,this.contraintes);
+		this.add(panneauTalon, this.contraintes);
 		this.panneauCouleur = new PanneauCouleurTalon(talon);
 		this.setContraintes(6, 3, 1, 1, GridBagConstraints.NORTH);
 		this.add(panneauCouleur, this.contraintes);
 		this.panneauJoueur.removeAll();
-		for(Joueur j : this.joueurs)
-		{
-			if(j.isEstJoueurActuel())
-			{
-				this.panneauJoueur= new PanneauJoueur(j);
+		for (Joueur j : this.joueurs) {
+			if (j.isEstJoueurActuel()) {
+				this.panneauJoueur = new PanneauJoueur(j);
 				this.setContraintes(0, 4, 100, 1, GridBagConstraints.SOUTH);
 				this.add(panneauJoueur, this.contraintes);
 			}
@@ -140,15 +133,14 @@ public class PanneauPrincipal extends JPanel implements Observer
 		this.panneauJoueur.validate();
 		this.validate();
 	}
-	
-	public void toutMettreAJour()
-	{
+
+	public void toutMettreAJour() {
 		this.mettreAjourJoueur();
-		
+
 	}
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		this.mettreAjourJoueur();
-		
 	}
 }

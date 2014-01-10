@@ -102,8 +102,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener, KeyList
         JPanel panneauLimite = new JPanel();
         panneauLimite.add(new JLabel ("Score Gagnant : "));
         this.choixScoreGagnant = new JComboBox ();
-        this.choixScoreGagnant.addItem("Illimité");
-        this.parametres.setScoreGagnant(Integer.MAX_VALUE);
         for (int i = 500; i <= 1000; i += 100)
         	this.choixScoreGagnant.addItem(i);
         this.choixScoreGagnant.addActionListener(this);
@@ -175,7 +173,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener, KeyList
 		
 		if (this.listeParticipants.size() < 8)
 		{
-			// XXX Rajouter quand niveaux virtuels
 			if (this.choixTypeJoueur.getSelectedIndex() == 1)
 				this.boutonAjouterJoueur.setEnabled(true);
 			else if (this.choixTypeJoueur.getSelectedIndex() == 2)
@@ -216,16 +213,14 @@ public class FenetrePrincipale extends JFrame implements ActionListener, KeyList
 			}
 			else if(this.choixTypeJoueur.getSelectedIndex() == 2)
 			{
-				// Astuce pour ne pas avoir des joueurs virtuels de même nom
 				do
 					joueurAjoute = new JoueurVirtuel (new Imprevisible());
 				while (!this.parametres.peutAjouterJoueur(joueurAjoute.getNom()));
 			}
 			else 
 			{
-				// Astuce pour ne pas avoir des joueurs virtuels de même nom
 				do
-					joueurAjoute = new JoueurVirtuel (new Imprevisible());
+					joueurAjoute = new JoueurVirtuel (new Avance());
 				while (!this.parametres.peutAjouterJoueur(joueurAjoute.getNom()));
 			}
 			this.parametres.ajouterJoueur(joueurAjoute);
@@ -251,9 +246,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener, KeyList
 		}	
 		else if (e.getSource() == this.choixScoreGagnant)
 		{
-			if (this.choixScoreGagnant.getSelectedIndex() == 0)
-				this.parametres.setScoreGagnant(Integer.MAX_VALUE);
-			else
 				this.parametres.setScoreGagnant(Integer.parseInt(this.choixScoreGagnant.getSelectedItem().toString()));
 		}
 		else if (e.getSource() == this.boutonValidation)
@@ -318,7 +310,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener, KeyList
 		this.partie = new Partie (this.parametres);
 		this.controleur = new Controleur (this.partie);
 		new FenetreParametre(this.controleur);
-	
 	}
 	
 }
