@@ -6,7 +6,11 @@ import java.util.Observer;
 
 import Modele.Carte;
 
-
+/**
+ * Class pioche
+ * @author Youssef, Ananias
+ *
+ */
 public class Pioche extends TasCartes{
 	private boolean piochable;
 	public Pioche(){
@@ -14,6 +18,11 @@ public class Pioche extends TasCartes{
 		piochable=true;
 	}
 	
+	/**
+	 * Vérifier si la pioche est piochable
+	 * @return
+	 * 		boolean
+	 */
 	public boolean isPiochable() {
 		return piochable;
 	}
@@ -26,11 +35,19 @@ public class Pioche extends TasCartes{
 		}
 	}
 
+	/**
+	 * Mélanger les cartes du jeu
+	 */
 	public void melangerCarte(){
 		Collections.shuffle(super.listeCarte);
 		super.setChanged();
 	}
 	
+	/**
+	 * Refaire la pioche
+	 * @param 
+	 * 		Talon de la partie
+	 */
 	public void refairePioche(Talon t) {
 		Carte derniereCarteTalon = t.retirerDerniereCarte();
 		t.viderDans(this);
@@ -38,6 +55,14 @@ public class Pioche extends TasCartes{
 		t.ajouterCarte(derniereCarteTalon);
 		}
 	
+	/**
+	 * Retirer deux carte de la pioche,
+	 * Vérifier si pioche est bien remplie
+	 * @param t
+	 * 		Talon de la partie
+	 * @return
+	 * 		Liste des cartes retirées
+	 */
 	public ArrayList<Carte> retirerDeuxDernieresCartes(Talon t)
 	{
 		if (this.listeCarte.size()< 4)
@@ -53,6 +78,15 @@ public class Pioche extends TasCartes{
 		
 	}
 	
+	
+	/**
+	 * Retirer quatres cartes de la pioche,
+	 * Vérifier si pioche est bien remplie
+	 * @param t
+	 * 		Talon de la partie
+	 * @return
+	 * 		Liste des cartes retirées
+	 */
 	public ArrayList<Carte> retirerQuatreDernieresCartes(Talon t)
 	{
 		if (this.listeCarte.size()< 6)

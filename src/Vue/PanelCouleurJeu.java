@@ -1,23 +1,35 @@
 package Vue;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
-
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Modele.Talon;
 
-public class PanneauCouleurTalon extends JPanel implements Observer {
+public class PanelCouleurJeu extends JPanel implements Observer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * label de l'image décrivant la couleur du jeu
+	 */
 	private JLabel labelImage = new JLabel();
+	
+	/**
+	 * Le talon de la patrie en cours
+	 */
 	private Talon talon;
 
-	public PanneauCouleurTalon(Talon talon) {
+	/**
+	 * Affecte une image au labelImage selon la couleur du talon
+	 * 
+	 * @param talon
+	 */
+	public PanelCouleurJeu(Talon talon) {
 		super();
 
 		talon.ajouterObserver(this);
@@ -27,7 +39,8 @@ public class PanneauCouleurTalon extends JPanel implements Observer {
 	}
 
 	/**
-	 * Met à jour l'image de la dernière carte de la défausse
+	 * Met à jour l'image de la couleur du jeu par rapport à la derniere carte du talon
+	 * 
 	 */
 	public void mettreAJourImage() {
 		if (this.talon.getListeCarte().isEmpty())

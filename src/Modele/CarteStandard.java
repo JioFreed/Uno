@@ -4,8 +4,20 @@ import java.util.ArrayList;
 
 import Vue.Images;
 
+/**
+ * Class représentant une carte normale
+ * @author Youssef, Ananias
+ *
+ */
 public class CarteStandard extends Carte {
 
+	/**
+	 * Création d'une carte normale
+	 * @param couleur
+	 * 		Couleur de la carte
+	 * @param valeur
+	 * 		Valeur de la carte
+	 */
 	public CarteStandard(int couleur, int valeur) {
 		super(couleur, valeur, 0,valeur);
 	}

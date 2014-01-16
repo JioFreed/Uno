@@ -2,16 +2,26 @@ package Modele;
 
 import java.util.Observer;
 
+/**
+ * Class représentant un talon qui hérite de la classe tas de carte
+ * @author Youssef,Ananias
+ *
+ */
 
 public class Talon extends TasCartes {
 	public Talon() {
 		super();
 	}
 
-	public void viderDans (TasCartes tasARemplir)
+	/**
+	 * Méthode qui permet de vider le talon dans la pioche
+	 * @param tas
+	 * 		tas à remplir
+	 */
+	public void viderDans (TasCartes tas)
 	{
 		while (!this.listeCarte.isEmpty())
-			tasARemplir.ajouterCarte(this.retirerDerniereCarte());
+			tas.ajouterCarte(this.retirerDerniereCarte());
 		super.setChanged();
 	}
 	

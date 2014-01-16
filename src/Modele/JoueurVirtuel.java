@@ -1,15 +1,31 @@
 package Modele;
 
-
-
-
-
+/**
+ * Class représentant le joueur Virtuel
+ * @author Pret
+ *
+ */
 public class JoueurVirtuel extends Joueur {
 	
-	private String[] name= new String [] {"Naruto", "Luffy", "Ichigo", "Captain America","Obama","Krytos","Wolverine",
-			"Dr Who","Messi","Barney","SpiderMan","Batman","Arrow","Spielberg","Stephen Hawking","Zeus","Iron Man"};
+	/**
+	 * Liste des noms
+	 */
+	private String[] name= new String [] {"Naruto", "Luffy", "Ichigo","Obama","Krytos","Wolverine",
+			"Dr Who","Messi","Barney","SpiderMan","Batman","Arrow","Spielberg","Hawking","Zeus","IronMan"};
+	
+	/**
+	 * Stratégie du joueur virtuel
+	 */
 	private Strategy strategy;
 	
+	/**
+	 * Constructeur du joueur virtuel
+	 * @param strategy
+	 * 		Stratégie choisie:
+	 * 			Aggressif,
+	 * 			Avance
+	 * 			Imprevisible
+	 */
 	public JoueurVirtuel(Strategy strategy)
 	{
 		super("");

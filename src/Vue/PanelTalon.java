@@ -18,12 +18,19 @@ import Modele.Talon;
  * @author Yann, Youssef
  *
  */
-public class PanneauTalon extends JPanel implements Observer
+public class PanelTalon extends JPanel implements Observer
 {
+	/**
+	 * Label de la derniere image du talon
+	 */
 	private JLabel labelImage = new JLabel ();
+	
+	/**
+	 * Talon de la partie
+	 */
 	private Talon talon;
 	
-	public PanneauTalon (Talon talon)
+	public PanelTalon (Talon talon)
 	{
 		super();
 		

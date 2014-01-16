@@ -1,13 +1,26 @@
 package Modele;
 
+
+
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import Vue.Images;
 
+
+/**
+ * Classe représentant la carte plus Quatre
+ * @author Pret
+ *
+ */
 public class CartePlusQuatre extends Carte {
 
+	/**
+	 * Création de la carte plus quatre
+	 * @param couleur
+	 * 			couleur de la carte
+	 */
 	public CartePlusQuatre(int couleur) {
 		super(couleur, 12, 4, 50);
 	}

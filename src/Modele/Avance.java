@@ -1,10 +1,13 @@
 package Modele;
 
+/**
+ * Cette classe définie le comportement du joueur virtuel Normal
+ * @author Youssef, Ananias
+ *
+ */
 public class Avance implements Strategy {
 	
-	public void passerSonTour(Talon t)
-	{
-	}
+
 	public int choisirCouleur(Talon t, Joueur j, Joueur j2)
 	{
 		return (int)(Math.random() * (3-0));
@@ -26,10 +29,21 @@ public class Avance implements Strategy {
 		}
 		return 1;		
 	}
-	@Override
+	
+	
 	public boolean douter() {
 		return  ((int)(Math.random() * (8-0))) > 4 ? true : false;
 	}
+	
+	/**
+	 * Verfier si le joueur à une carte plus quatre
+	 * @param t
+	 * 		Talon de la partie
+	 * @param j
+	 * 		Joueur courant
+	 * @return
+	 * 		l'indice de la carte si elle est présente sinon -1
+	 */
 	public int jouerCarte4(Talon t,Joueur j)
 	{
 		for (int i=0; i<j.main.size();i++)
@@ -40,6 +54,16 @@ public class Avance implements Strategy {
 		return -1;
 	}
 	
+	
+	/**
+	 * Verfier si le joueur à une carte plus deux
+	 * @param t
+	 * 		Talon de la partie
+	 * @param j
+	 * 		Joueur courant
+	 * @return
+	 * 		l'indice de la carte si elle est présente sinon -1
+	 */
 	public int jouerCarte2(Talon t,Joueur j)
 	{
 		for (int i=0; i<j.main.size();i++)
@@ -50,6 +74,16 @@ public class Avance implements Strategy {
 		return -1;
 	}
 	
+	
+	/**
+	 * Verfier si le joueur à une carte stop
+	 * @param t
+	 * 		Talon de la partie
+	 * @param j
+	 * 		Joueur courant
+	 * @return
+	 * 		l'indice de la carte si elle est présente sinon -1
+	 */
 	public int jouerCarteStop(Talon t,Joueur j)
 	{
 		for (int i=0; i<j.main.size();i++)
@@ -60,6 +94,16 @@ public class Avance implements Strategy {
 		return -1;
 	}
 	
+	
+	/**
+	 * Verfier si le joueur à une carte Inverser
+	 * @param t
+	 * 		Talon de la partie
+	 * @param j
+	 * 		Joueur courant
+	 * @return
+	 * 		l'indice de la carte si elle est présente sinon -1
+	 */
 	public int jouerCarteInverser(Talon t,Joueur j)
 	{
 		for (int i=0; i<j.main.size();i++)
@@ -70,6 +114,16 @@ public class Avance implements Strategy {
 		return -1;
 	}
 	
+	
+	/**
+	 * Verfier si le joueur à une carte Joker
+	 * @param t
+	 * 		Talon de la partie
+	 * @param j
+	 * 		Joueur courant
+	 * @return
+	 * 		l'indice de la carte si elle est présente sinon -1
+	 */
 	public int jouerCarteJoker(Talon t,Joueur j)
 	{
 		for (int i=0; i<j.main.size();i++)
@@ -80,6 +134,16 @@ public class Avance implements Strategy {
 		return -1;
 	}
 	
+	
+	/**
+	 * Verfier si le joueur à une carte Standard
+	 * @param t
+	 * 		Talon de la partie
+	 * @param j
+	 * 		Joueur courant
+	 * @return
+	 * 		l'indice de la carte si elle est présente sinon -1
+	 */
 	public int jouerCarteStandard(Talon t,Joueur j)
 	{
 		for (int i=0; i<j.main.size();i++)
@@ -90,6 +154,18 @@ public class Avance implements Strategy {
 		return -1;
 	}
 	
+	
+	/**
+	 * liste des priorité pour jouer normalement
+	 * @param t
+	 * 		Talon de la partie
+	 * @param j
+	 * 		Joueur courant
+	 * @param j2
+	 * 		Joueur Suivant
+	 * @return
+	 * 		l'indice de la carte à jouer
+	 */
 	public int comportementNormal(Talon t,Joueur j, Joueur j2)
 	{
 		if(this.jouerCarteStandard(t, j) != -1)

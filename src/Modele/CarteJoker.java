@@ -1,12 +1,23 @@
 package Modele;
 
+
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import Vue.Images;
 
+/**
+ * Classe représentant la carte Joker
+ * @author Youssef, Ananias
+ *
+ */
 public class CarteJoker extends Carte {
-
+	
+	/**
+	 *	Instanciation de la carte joker
+	 * @param couleur
+	 * 		couleur de la carte
+	 */
 	public CarteJoker(int couleur) {
 		super(couleur, 13, -1, 50);
 	}

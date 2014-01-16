@@ -1,5 +1,6 @@
 package Controleur;
 
+
 import java.util.ArrayList;
 import java.util.Observer;
 
@@ -10,6 +11,11 @@ import Modele.Joueur;
 import Modele.Partie;
 import Modele.Pioche;
 
+/**
+ * Controleur de la partie
+ * @author Youssef, Ananias
+ *
+ */
 
 public class Controleur
 {
@@ -65,7 +71,7 @@ public class Controleur
 	}
 	public ArrayList<Joueur> getJoueurs ()
 	{
-		return this.partie.getManche().getJoueurs();
+		return this.partie.getJoueursParticipants();
 	}
 	
 	

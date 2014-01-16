@@ -1,12 +1,12 @@
 package Modele;
 
-import Vue.FenetrePrincipale;
+import Vue.FenetreParametre;
 
 
 public class TestUno {
 
 	public static void main(String[] args) {
 
-		new FenetrePrincipale();
+		new FenetreParametre();
 	}
 }

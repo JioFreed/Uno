@@ -8,9 +8,9 @@ import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
 /**
- * Classe contenant toutes les données relatives aux images de la partie
+ * Classe contenant les différentes images des difféntes carte du jeu
  * 
- * @author Yann, Youssef
+ * @author Youssef,Ananias
  *
  */
 public class Images
@@ -158,9 +158,9 @@ public class Images
 	 * 			Composant à qui on cherche la fenêtre
 	 * @return Une instance de FenetrePrincipale
 	 */
-	public static FenetreParametre getFenetre (JComponent c)
+	public static FenetreJeu getFenetre (JComponent c)
 	{
 		Window window = SwingUtilities.windowForComponent(c);
-		return (FenetreParametre) window;
+		return (FenetreJeu) window;
 	}
 }

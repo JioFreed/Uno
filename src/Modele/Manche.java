@@ -1,6 +1,5 @@
 package Modele;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
@@ -15,24 +14,71 @@ import Modele.Pioche;
 import Modele.TasCartes;
 
 public class Manche extends Observable {
-	final static Color[] COULEURS = { Color.RED, Color.YELLOW, Color.BLUE,
-			Color.GREEN };
-
+	
+	/**
+	 * le Joueur courant dans la manche
+	 */
 	public Joueur joueurCourant;
+	/**
+	 * Le joueur suivant dans la manche
+	 */
 	public Joueur joueurSuivant;
+	/**
+	 * le tas de carte
+	 */
 	public TasCartes Tas;
+	/**
+	 * La carte courante du joueur
+	 */
 	public Carte carteCourante;
+	/**
+	 * Liste des joueurs participant à la partie
+	 */
 	public ArrayList<Joueur> joueurs;
+	/**
+	 * Le talon de la partie
+	 */
 	private Talon talon = new Talon();
+	/**
+	 * La pioche de la partie
+	 */
 	public Pioche pioche = new Pioche();
+	/**
+	 * Boolean verifier si la manche est fini
+	 */
 	private boolean mancheEstFinie;
+	/**
+	 * Boolean pour refaire la manche
+	 */
 	private boolean refairePioche = false;
+	
+	/**
+	 * score final de la manche
+	 */
 	public int score = 0;
+	/**
+	 * Uno
+	 */
 	private boolean uno = false;
+	
+	/**
+	 * Verifier si un joueur réel est existant
+	 */
 	private boolean joueurReelExistant = false;
+	
+	/**
+	 * Joueur gagnant
+	 */
 	private Joueur joueurGagnant;
+	
+	/**
+	 * Liste des observers
+	 */
 	private ArrayList<Observer> listeObservers = new ArrayList<Observer>();
 
+	/**
+	 * Initiation de la manche
+	 */
 	public Manche() {
 		this.carteCourante = null;
 		this.joueurCourant = null;
@@ -40,15 +86,9 @@ public class Manche extends Observable {
 		this.setMancheEstFinie(false);
 	}
 
-	public void setJoueurReelExistant(boolean joueur) {
-		this.joueurReelExistant = joueur;
-		this.setChanged();
-	}
-
-	public boolean getJoueurReelExistant() {
-		return this.joueurReelExistant;
-	}
-
+	/**
+	 * Méthode permettant d'initialiser toutes les cartes et remplir la pioche
+	 */
 	public void remplirPioche() {
 
 		ArrayList<Carte> carte = new ArrayList<Carte>();
@@ -95,10 +135,17 @@ public class Manche extends Observable {
 		}
 	}
 
+	/**
+	 * Méthode permettant d'ajouter un joueur
+	 * @param j
+	 */
 	public void ajouterJoueur(Joueur j) {
 		this.joueurs.add(j);
 	}
 
+	/**
+	 * Méthode pour refaire la pioche
+	 */
 	public void refairePioche() {
 		this.getRefairePioche();
 		if (this.refairePioche) {
@@ -110,6 +157,9 @@ public class Manche extends Observable {
 
 	}
 
+	/**
+	 * Méthode permettant de distribuer les cartes aux joueurs
+	 */
 	public void distribuerCartes() {
 		this.remplirPioche();
 		this.pioche.melangerCarte();
@@ -127,6 +177,10 @@ public class Manche extends Observable {
 		System.out.println("le Talon est :  " + this.talon.getListeCarte());
 	}
 
+	/**
+	 * Méthode permettant de définir l'ordre des joueurs
+	 * @param choix
+	 */
 	public void ordonnerJoueur(int choix) {
 		ArrayList<Joueur> listeJoueurs = new ArrayList<Joueur>();
 		;
@@ -137,6 +191,10 @@ public class Manche extends Observable {
 		this.joueurs = listeJoueurs;
 	}
 
+	/**
+	 * Méthode permettant de définir le joueur qui va distribuer les cartes
+	 * @return
+	 */
 	public int choixDistributeur() {
 		this.remplirPioche();
 		this.pioche.melangerCarte();
@@ -146,12 +204,12 @@ public class Manche extends Observable {
 		for (int i = 0; i < this.joueurs.size(); i++) {
 			this.joueurCourant = this.joueurs.get(i);
 			this.joueurCourant.ajouterCarte(this.pioche.retirerDerniereCarte());
-			// System.out.println("le joueur " + this.joueurCourant.getNom()
-			// + " a la carte " + this.joueurCourant.getMain());
-			// JOptionPane.showMessageDialog(null,
-			// joueurs.get(i).getNom() + " a la carte  "
-			// +joueurs.get(i).getDerniereCarte().toString(), "alert",
-			// JOptionPane.ERROR_MESSAGE);
+			System.out.println("le joueur " + this.joueurCourant.getNom()
+			 + " a la carte " + this.joueurCourant.getMain());
+			 JOptionPane.showMessageDialog(null,
+			 joueurs.get(i).getNom() + " a la carte  "
+			 +joueurs.get(i).getDerniereCarte().toString(), "alert",
+			 JOptionPane.ERROR_MESSAGE);
 			if (this.joueurCourant.getDerniereCarte() instanceof CartePlusDeux
 					|| this.joueurCourant.getDerniereCarte() instanceof CarteJoker
 					|| this.joueurCourant.getDerniereCarte() instanceof CarteInverser
@@ -166,19 +224,22 @@ public class Manche extends Observable {
 			}
 
 		}
-		// JOptionPane.showMessageDialog(null,
-		// " La plus grosse carte appartient à " + joueurs.get(indice).getNom()
-		// + " c'est a lui de distribuer les cartes " , "alert",
-		// JOptionPane.ERROR_MESSAGE);
-		// System.out.println("la plus grosse carte est " + max
-		// + " elle appartient a " + top + " l'indice est : " + indice);
+		 JOptionPane.showMessageDialog(null,
+		 " La plus grosse carte appartient à " + joueurs.get(indice).getNom()
+		 + " c'est a lui de distribuer les cartes " , "alert",
+		 JOptionPane.ERROR_MESSAGE);
+		
 		for (int i = 0; i < this.joueurs.size(); i++)
-			this.joueurs.get(i).retirerCarteMain(0);
+			this.joueurs.get(i).main.remove(0);
 		this.pioche.listeCarte.clear();
 		return indice;
 	}
 
-	public void commencerPartie() {
+	/**
+	 * 
+	 * Méthode pour commencerla manche
+	 */
+	public void commencerManche() {
 		this.ordonnerJoueur(this.choixDistributeur());
 		this.distribuerCartes();
 		for (Joueur j : this.joueurs) {
@@ -201,20 +262,20 @@ public class Manche extends Observable {
 
 	}
 
+	/**
+	 * Méthode pour piocher une carte
+	 */
 	public void piocherCarte() {
 		this.joueurCourant.ajouterCarte(this.pioche.retirerDerniereCarte());
 		this.joueurCourant.setAPiocher(true);
 		this.pioche.setPiochable(false);
 	}
 
-	public ArrayList<Observer> getListeObservers() {
-		return listeObservers;
-	}
-
-	public void setListeObservers(ArrayList<Observer> listeObservers) {
-		this.listeObservers = listeObservers;
-	}
-
+	/**
+	 * Définir la carte actuelle
+	 * @param c
+	 * 		la cate à définir
+	 */
 	public void setCarteActuelle(Carte c) {
 
 		if (this.talon.getDerniereCarte().comparerCarte(c))
@@ -225,6 +286,11 @@ public class Manche extends Observable {
 
 	}
 
+	/**
+	 * Méthode permettant de choisir le prochain joueur à jouer
+	 * @return
+	 * 	Joueur à jouer
+	 */
 	public Joueur choixJoueur() {
 		for (int i = 0; i < this.joueurs.size(); i++) {
 			if (this.joueurs.get(i) == this.joueurCourant) {
@@ -240,6 +306,9 @@ public class Manche extends Observable {
 		return this.joueurSuivant;
 	}
 
+	/**
+	 * Vérifie que la manche n'est pas finie et demande au joueur de jouer
+	 */
 	public void mancheSuivante() {
 		this.mancheEstFinie();
 		if (!this.mancheEstFinie) {
@@ -268,9 +337,6 @@ public class Manche extends Observable {
 					this.carteCourante = this.joueurCourant.getMain().get(0);
 					if (this.talon.getDerniereCarte().comparerCarte(
 							this.carteCourante)) {
-						System.out.println(this.joueurCourant.getNom()
-								+ " a les cartes suivantes : "
-								+ this.joueurCourant.getMain());
 						this.jouerCarte();
 					} else
 						this.passerTour();
@@ -297,20 +363,13 @@ public class Manche extends Observable {
 		}
 	}
 
-	public void permettreDePiocher() {
-		this.pioche.setPiochable(true);
-	}
-
-	public void passerTour() {
-		this.mancheSuivante();
-	}
-
-	public void getRefairePioche() {
-		if (this.pioche.listeCarte.isEmpty())
-			refairePioche = true;
-	}
-
+	/**
+	 *  Méthode permettant de jouer
+	 */
 	public void jouerCarte() {
+		//System.out.println("Le talon est : " + this.talon.getDerniereCarte());
+		//System.out.println(this.joueurCourant.getNom() + " a les cartes suivantes " + this.joueurCourant.getMain() );
+		//System.out.println(this.joueurCourant.getNom() + "a joué la carte " + this.getCarteCourante().toString());
 		this.joueurCourant.retirerCarteMain(this.carteCourante);
 		this.talon.ajouterCarte(this.carteCourante);
 		if (this.joueurCourant.getMain().size() == 1)
@@ -322,6 +381,10 @@ public class Manche extends Observable {
 		this.mancheSuivante();
 	}
 
+	/**
+	 * Vérifier si la manche est finie
+	 * 
+	 */
 	public void mancheEstFinie() {
 		if (!this.mancheEstFinie) {
 			for (Joueur joueurCourant : this.joueurs) {
@@ -346,15 +409,29 @@ public class Manche extends Observable {
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @param mancheEstFinie
+	 */
+	public void setMancheEstFinie(boolean mancheEstFinie) {
+		this.mancheEstFinie = mancheEstFinie;
+		if (this.mancheEstFinie) {
 
-	public void setJoueurGagnant(Joueur j) {
-		this.joueurGagnant = j;
+			for (Joueur joueurCourant : this.joueurs) {
+
+				System.out.println(joueurCourant.getNom() + " a  "
+						+ joueurCourant.getScore());
+				joueurCourant.main.clear();
+			}
+			this.setChanged();
+		}
+
 	}
-
-	public Joueur getJoueurGagnant2() {
-		return this.joueurGagnant;
-	}
-
+	
+	/**
+	 * Récuperer le score total
+	 */
 	public int getScoreTotal() {
 		int max = 0;
 		Joueur joueur = joueurs.get(0);
@@ -364,7 +441,11 @@ public class Manche extends Observable {
 		}
 		return max;
 	}
-
+	
+	/**
+	 * 
+	 * @return Le joueur gagnant
+	 */
 	public Joueur getJoueurGagnant() {
 		for (Joueur joueurCourant : this.joueurs) {
 			if (joueurCourant.getScore() >= 500)
@@ -373,12 +454,29 @@ public class Manche extends Observable {
 		return null;
 	}
 
+	/**
+	 * Définir si le joueur à une carte 
+	 * @param v
+	 */
 	public void setUno(boolean v) {
 		this.uno = v;
-		this.setChanged();
-		if (this.uno)
+		if (this.uno) {
 			System.out.println(this.joueurCourant.getNom() + " UNO !!!! ");
+			this.setChanged();
+		}
 	}
+	
+	public void setJoueurGagnant(Joueur j) {
+		this.joueurGagnant = j;
+	}
+	
+	
+	public Joueur getJoueurGagnant2() {
+		return this.joueurGagnant;
+	}
+
+	
+
 
 	public boolean getUno() {
 		return this.uno;
@@ -420,8 +518,8 @@ public class Manche extends Observable {
 		return talon;
 	}
 
-	public void setTalon(Talon defausse) {
-		this.talon = defausse;
+	public void setTalon(Talon talon) {
+		this.talon = talon;
 	}
 
 	public Pioche getPioche() {
@@ -434,23 +532,6 @@ public class Manche extends Observable {
 
 	public boolean isMancheEstFinie() {
 		return mancheEstFinie;
-	}
-
-	public void setMancheEstFinie(boolean mancheEstFinie) {
-		this.mancheEstFinie = mancheEstFinie;
-		if (this.mancheEstFinie) {
-
-			for (Joueur joueurCourant : this.joueurs) {
-
-				System.out.println(joueurCourant.getNom() + " a  "
-						+ joueurCourant.getScore());
-				joueurCourant.main.clear();
-			}
-			this.talon.listeCarte.clear();
-			this.pioche.listeCarte.clear();
-		}
-		this.setChanged();
-
 	}
 
 	public ArrayList<Joueur> getJoueurs() {
@@ -479,5 +560,32 @@ public class Manche extends Observable {
 
 	public void setChangedNouvellePioche() {
 		this.notifierObservers(true);
+	}
+	public void setJoueurReelExistant(boolean joueur) {
+		this.joueurReelExistant = joueur;
+		this.setChanged();
+	}
+
+	public boolean getJoueurReelExistant() {
+		return this.joueurReelExistant;
+	}
+	public ArrayList<Observer> getListeObservers() {
+		return listeObservers;
+	}
+
+	public void setListeObservers(ArrayList<Observer> listeObservers) {
+		this.listeObservers = listeObservers;
+	}
+	public void permettreDePiocher() {
+		this.pioche.setPiochable(true);
+	}
+
+	public void passerTour() {
+		this.mancheSuivante();
+	}
+
+	public void getRefairePioche() {
+		if (this.pioche.listeCarte.isEmpty())
+			refairePioche = true;
 	}
 }

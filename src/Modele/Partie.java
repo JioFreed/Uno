@@ -6,36 +6,67 @@ import java.util.Observer;
 import java.util.Scanner;
 import Vue.*;
 
+/**
+ * Class représentant la partie
+ * 
+ * @author Youssef, Ananias
+ *
+ */
 public class Partie extends Observable{
+	
+	/**
+	 * la manche en cours
+	 */
 	private Manche manche;
-	public static boolean partieEstFinie = false;
+	/**
+	 * le score gagnant de la partie
+	 */
 	public static int scoreGagnant = 500;
-	public boolean nextRound= false;
+	
+	/**
+	 * Liste des joueurs participants 
+	 */
+	public ArrayList<Joueur> joueursParticipants = new ArrayList<Joueur>();
 
+	/**
+	 * Liste des observers
+	 */
 	public ArrayList<Observer> listeObservers = new ArrayList<Observer>();
 
+	
+	/**
+	 * Construction de la partie à partir des paramètres
+	 * @param p
+	 * 		parametres de la partie
+	 */
 	public Partie(ParametrePartie p) {
 		scoreGagnant = p.getScoreGagnant();
-		manche = new Manche();
-		this.manche.joueurs=p.getJoueurs();
+		this.joueursParticipants = p.getJoueurs();
 	}
-	public boolean isNextRound() {
-		return nextRound;
-	}
+	
+	/**
+	 * Méthode permettant de créer une nouvelle manche et de lui affecter une liste de joueurs
+	 */
 	public void init()
-	{
-		this.manche.setMancheEstFinie(false);
-		this.manche.setUno(false);
-		this.manche.setJoueurCourant(null);
-		this.manche.setCarteCourante(null);
+	{	
+		this.manche= new Manche();
+		this.manche.joueurs = this.joueursParticipants;
 	}
 
-	public void setNextRound(boolean nextRoun) {
-		nextRound = nextRoun;
-		this.setChanged();
+	/**
+	 * Méthode permettant de démarer une partie
+	 */
+	public void demarerPartie() {
+		manche.commencerManche();
 	}
-
-
+	
+	public ArrayList<Joueur> getJoueursParticipants() {
+		return joueursParticipants;
+	}
+	public void setJoueursParticipants(ArrayList<Joueur> joueursParticipants) {
+		this.joueursParticipants = joueursParticipants;
+	}
+	
 	public void ajouterJoueur(Joueur j) {
 		manche.ajouterJoueur(j);
 	}
@@ -43,26 +74,13 @@ public class Partie extends Observable{
 	{
 		this.listeObservers.add(observer);
 	}
-	
-
-	public void demarerPartie() {
-		manche.commencerPartie();
-	}
 
 	public Manche getManche() {
-		return manche;
+		return this.manche;
 	}
 
 	public void setManche(Manche manche) {
 		this.manche = manche;
-	}
-
-	public boolean isPartieEstFinie() {
-		return partieEstFinie;
-	}
-
-	public void setPartieEstFinie(boolean partieEstFini) {
-		partieEstFinie = partieEstFini;
 	}
 
 	public static int getScoreGagnant() {

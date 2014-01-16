@@ -10,37 +10,69 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JToolTip;
 import javax.swing.border.TitledBorder;
-
-import Modele.Carte;
 import Modele.Joueur;
 
-public class PanneauJoueur extends JPanel implements Observer, ActionListener
+public class PanelJoueur extends JPanel implements Observer, ActionListener
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * Taille horizontale du panel
+	 */
 	final static int TAILLE_HORIZONTALE = 1100;
+	
+	/**
+	 * Taille verticale du panel
+	 */
 	final static int TAILLE_VERTICALE = 280;
+	
+	/**
+	 * Le joueur concerné
+	 */
 	private Joueur joueur;
+	
+	/**
+	 * le titre qui est aussi le nom du joueur courant
+	 */
 	private TitledBorder titre;
+	
+	/**
+	 * Panel représentant la main du jouer courant
+	 */
 	private JPanel panneauMain;
-	private JPanel panneauCible;
+	
+	/**
+	 * Panneau pour l'action à effectuer
+	 */
+	private JPanel panneauAction;
+	
 	private GridBagConstraints contraintes;
+	/**
+	 * Bouton permettant de jouer
+	 */
 	private JButton boutonCible = new JButton ("Jouer !");
+	
+	/**
+	 * Bouton permettant de passer son tour
+	 */
 	private JButton boutonPasser = new JButton ("Passer son Tour !");
 	
-	public PanneauJoueur (Joueur joueurConcerne)
+	/**
+	 * Crée les différents panel composant le panneau du joueur
+	 * @param joueurConcerne
+	 */
+	
+	public PanelJoueur (Joueur joueurConcerne)
 	{
 		super();
-
-		//joueurConcerne.ajouterObserver(this);
 		this.joueur = joueurConcerne;
 		
 		// Forme du panneau principal
 		this.titre = new TitledBorder(joueurConcerne.getNom());
-		//this.changerCouleur(joueurConcerne.getCouleur());
 		this.setBorder(this.titre);
 		this.setPreferredSize(new Dimension(TAILLE_HORIZONTALE + 20, TAILLE_VERTICALE + 20));
         this.setMaximumSize(new Dimension(TAILLE_HORIZONTALE + 20, TAILLE_VERTICALE + 20));
@@ -58,18 +90,18 @@ public class PanneauJoueur extends JPanel implements Observer, ActionListener
         this.setContraintes(0, 0, 2, 3);
         this.add(this.panneauMain, this.contraintes);     
         
-        this.panneauCible = new JPanel ();
-		this.panneauCible.setPreferredSize(new Dimension(TAILLE_HORIZONTALE/4, TAILLE_VERTICALE/3));
-        this.panneauCible.setMaximumSize(new Dimension(TAILLE_HORIZONTALE/4, TAILLE_VERTICALE/3));
-        this.panneauCible.setMinimumSize(new Dimension(TAILLE_HORIZONTALE/4, TAILLE_VERTICALE/3)); 
+        this.panneauAction = new JPanel ();
+		this.panneauAction.setPreferredSize(new Dimension(TAILLE_HORIZONTALE/4, TAILLE_VERTICALE/3));
+        this.panneauAction.setMaximumSize(new Dimension(TAILLE_HORIZONTALE/4, TAILLE_VERTICALE/3));
+        this.panneauAction.setMinimumSize(new Dimension(TAILLE_HORIZONTALE/4, TAILLE_VERTICALE/3)); 
         
         this.boutonCible.addActionListener(this);
         this.boutonPasser.addActionListener(this);
-        this.panneauCible.add(this.boutonCible);
-        this.panneauCible.add(this.boutonPasser);
+        this.panneauAction.add(this.boutonCible);
+        this.panneauAction.add(this.boutonPasser);
         
         this.setContraintes(3, 2, 1, 1);
-        this.add(this.panneauCible, this.contraintes);
+        this.add(this.panneauAction, this.contraintes);
         
         this.toutMettreAJour();
 	}
@@ -80,7 +112,7 @@ public class PanneauJoueur extends JPanel implements Observer, ActionListener
 	}
 	
 	/**
-	 * Met à jour le panel contenant la main du joueur
+	 * Met à jour le panel contenant la main du joueur courant
 	 */
 	public void mettreAJourMain ()
 	{
@@ -88,10 +120,7 @@ public class PanneauJoueur extends JPanel implements Observer, ActionListener
 		GestionnaireMain gestionnaire = new GestionnaireMain ();
 		for (int i = 0; i < this.joueur.getMain().size(); i++)
 		{
-			//if (this.joueur.isEstJoueurActuel())
-				this.panneauMain.add(new LabelCarte (this.joueur.getMain().get(i), "moy", gestionnaire));
-			//else
-				//this.panneauMain.add(new JLabel (Images.redimensionnerMoy(Images.CACHEE)));
+			this.panneauMain.add(new LabelCarte (this.joueur.getMain().get(i), "moy", gestionnaire));
 		}
 		this.panneauMain.validate();
 	}
@@ -102,6 +131,12 @@ public class PanneauJoueur extends JPanel implements Observer, ActionListener
 		this.mettreAJourCible();
 	}
 
+	/**
+	 * Met à jour le bouton d'action selon les carte en possession
+	 * 
+	 * Le bouton jouer ne s'affiche que lorsqu'un joueur à une carte jouable
+	 * Le bouton passer son tour ne s'affiche que lorqu'un joueur n'a pas de carte jouable même s'il a pioché une carte
+	 */
 	public void mettreAJourCible()
 	{
 		if (this.joueur.isaUneCarteJouable())
@@ -132,8 +167,6 @@ public class PanneauJoueur extends JPanel implements Observer, ActionListener
 	}
 	public void update(Observable arg0, Object arg1) 
 	{
-		/*if (!this.joueur.estJoueurVirtuel())
-			JOptionPane.showMessageDialog(Images.getFenetre(this), this.joueur + " à toi de jouer !");*/
 		this.toutMettreAJour();
 	}
 	

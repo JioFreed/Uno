@@ -15,18 +15,35 @@ import Modele.Carte;
 /**
  * Label contenant une carte
  * 
- * @author Yann, Youssef
+ * @author Youssef, Ananias
  *
  */
 public class LabelCarte extends JLabel implements MouseListener
 {
-
+	/**
+	 * la carte concernée
+	 */
 	private Carte carte;
 
+	/**
+	 * l'image associée à la carte
+	 */
 	private ImageIcon image;
 
+	/**
+	 * Gestionnaire de la main du joueur
+	 */
 	private GestionnaireMain gestionnaire;
 	
+	/**
+	 * Instancie le label de la carte en associant une taille et une image à la carte en question
+	 * @param carte
+	 * 			Carte concernée
+	 * @param taille
+	 * 			La taille choisi pour l'affichage
+	 * @param gestionnaire
+	 * 			le gestionnaire de la main
+	 */
 	public LabelCarte (Carte carte, String taille, GestionnaireMain gestionnaire)
 	{
 		super();
@@ -44,7 +61,7 @@ public class LabelCarte extends JLabel implements MouseListener
 	}
 	
 	/**
-	 * Applique le focus sur le label
+	 * Met le focus sur le label
 	 */
 	public void mettreFocus ()
 	{
@@ -74,9 +91,8 @@ public class LabelCarte extends JLabel implements MouseListener
 	 */
 	public void mouseClicked(MouseEvent arg0) 
 	{
-		// On indique au gestionnaire que c'est ce label qui doit avoir le focus
 		Window window = SwingUtilities.windowForComponent(this);
-		FenetreParametre frame = (FenetreParametre) window;
+		FenetreJeu frame = (FenetreJeu) window;
 		this.gestionnaire.mettreFocus(this, frame);
 	}
 

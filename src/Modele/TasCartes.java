@@ -7,13 +7,27 @@ import java.util.Observer;
 import Modele.Carte;
 import Modele.TasCartes;
 
-
+/**
+ * Class abstraite représentant les différents tas de carte
+ * @author Youssef, Ananias
+ *
+ */
 public abstract class TasCartes extends Observable{
 	
+	/**
+	 * Liste des cartes dans le tas
+	 */
 	protected ArrayList<Carte> listeCarte;
-	private ArrayList<Observer>listeObservers = new ArrayList<Observer>();
 	
+	/**
+	 * Liste des observers
+	 */
+	private ArrayList<Observer>listeObservers = new ArrayList<Observer>();
 
+
+	/**
+	 * Initiation d'un tas de carte vide
+	 */
 	public TasCartes() {
 		this.listeCarte = new ArrayList <Carte> ();
 	}
@@ -50,6 +64,10 @@ public abstract class TasCartes extends Observable{
 		this.listeObservers = listeObservers;
 	}
 
+	/**
+	 * Retirer la derniere carte du tas
+	 * @return Carte
+	 */
 	public Carte retirerDerniereCarte () 
 	{
 		if (this.listeCarte.isEmpty())

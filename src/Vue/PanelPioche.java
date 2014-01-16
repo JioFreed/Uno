@@ -15,17 +15,36 @@ import Modele.Pioche;
 /**
  * Panel gérant la pioche de la partie
  * 
- * @author Yann, Youssef
+ * @author Youssef, Ananias
  *
  */
-public class PanneauPioche extends JPanel implements Observer, ActionListener
+public class PanelPioche extends JPanel implements Observer, ActionListener
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	private JLabel labelImage = new JLabel ();
+	
+	/**
+	 * Bouton permettant de piocher une carte
+	 */
 	private JButton boutonPioche = new JButton("<html>Prendre dans <br/> la pioche</html>");
+	
+	/**
+	 * Pioche de la partie
+	 */
 	private Pioche pioche;
 	
-	public PanneauPioche (Pioche pioche)
+	/**
+	 * Crée une panneau contenant un label de carte cachée et un bouton permettant de piocher
+	 * @param pioche
+	 */
+	public PanelPioche (Pioche pioche)
 	{
 		super();
 		
@@ -47,10 +66,7 @@ public class PanneauPioche extends JPanel implements Observer, ActionListener
 	 */
 	public void mettreAJourImage ()
 	{
-		if (this.pioche.getListeCarte().isEmpty())
-			this.labelImage.setIcon(Images.redimensionnerMax(Images.CACHEE));
-		else
-			this.labelImage.setIcon(Images.redimensionnerMax(Images.CACHEE));
+		this.labelImage.setIcon(Images.redimensionnerMax(Images.CACHEE));
 	}
 	/**
 	 * Met à jour le bouton permettant de piocher

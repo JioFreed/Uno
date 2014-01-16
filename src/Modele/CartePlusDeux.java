@@ -4,11 +4,19 @@ import java.util.ArrayList;
 
 import Vue.Images;
 
-
+/**
+ * Classe représentant la carte plus deux
+ * @author Youssef,Ananias
+ *
+ */
 
 public class CartePlusDeux extends Carte{
 
-	
+	/**
+	 * Instanciation de la carte plus deux 
+	 * @param couleur
+	 * 		Couleur de la carte
+	 */
 	public CartePlusDeux(int couleur) {
 		super(couleur, 11, 2,20);
 	}

@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import Vue.Images;
 
+/**
+ * Class représentant une carte Stop
+ * @author Youssef, Ananias
+ *
+ */
 public class CarteStop extends Carte{
 
 	public CarteStop(int couleur) {

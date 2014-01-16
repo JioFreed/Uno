@@ -1,12 +1,15 @@
 package Modele;
 
 
+/**
+ * Cette classe définie le comportement du joueur virtuel Imprevisible
+ * @author Youssef, Ananias
+ *
+ */
+
 public class Imprevisible implements Strategy {
 
-	@Override
-	public void passerSonTour(Talon t)
-	{
-	}
+	
 	public int choisirCouleur(Talon t, Joueur j, Joueur j2)
 	{
 		return (int)(Math.random() * (3-0));
@@ -28,11 +31,21 @@ public class Imprevisible implements Strategy {
 		}
 		return 1;		
 	}
-	@Override
+	
 	public boolean douter() {
-		// TODO Auto-generated method stub
 		return  ((int)(Math.random() * (8-0))) > 4 ? true : false;
 	}
+	
+	
+	/**
+	 * Verfier si le joueur à une carte plus quatre
+	 * @param t
+	 * 		Talon de la partie
+	 * @param j
+	 * 		Joueur courant
+	 * @return
+	 * 		l'indice de la carte si elle est présente sinon -1
+	 */
 	public int jouerCarte4(Talon t,Joueur j)
 	{
 		for (int i=0; i<j.main.size();i++)
@@ -43,6 +56,17 @@ public class Imprevisible implements Strategy {
 		return -1;
 	}
 	
+	
+	/**
+	 * Verfier si le joueur à une carte plus deux
+	 * @param t
+	 * 		Talon de la partie
+	 * @param j
+	 * 		Joueur courant
+	 * @return
+	 * 	
+	 * 		l'indice de la carte sinon -1
+	 */
 	public int jouerCarte2(Talon t,Joueur j)
 	{
 		for (int i=0; i<j.main.size();i++)
@@ -53,6 +77,15 @@ public class Imprevisible implements Strategy {
 		return -1;
 	}
 	
+	/**
+	 * Verfier si le joueur à une cartestop
+	 * @param t
+	 * 		Talon de la partie
+	 * @param j
+	 * 		Joueur courant
+	 * @return
+	 * 		l'indice de la carte si elle est présente sinon -1
+	 */
 	public int jouerCarteStop(Talon t,Joueur j)
 	{
 		for (int i=0; i<j.main.size();i++)
@@ -63,6 +96,16 @@ public class Imprevisible implements Strategy {
 		return -1;
 	}
 	
+	
+	/**
+	 * Verfier si le joueur à une carte inverser
+	 * @param t
+	 * 		Talon de la partie
+	 * @param j
+	 * 		Joueur courant
+	 * @return
+	 * 		l'indice de la carte si elle est présente sinon -1
+	 */
 	public int jouerCarteInverser(Talon t,Joueur j)
 	{
 		for (int i=0; i<j.main.size();i++)
@@ -73,6 +116,15 @@ public class Imprevisible implements Strategy {
 		return -1;
 	}
 	
+	/**
+	 * Verfier si le joueur à une carte joker
+	 * @param t
+	 * 		Talon de la partie
+	 * @param j
+	 * 		Joueur courant
+	 * @return
+	 * 		l'indice de la carte si elle est présente sinon -1
+	 */
 	public int jouerCarteJoker(Talon t,Joueur j)
 	{
 		for (int i=0; i<j.main.size();i++)
@@ -83,6 +135,16 @@ public class Imprevisible implements Strategy {
 		return -1;
 	}
 	
+	
+	/**
+	 * Verfier si le joueur à une carte normale
+	 * @param t
+	 * 		Talon de la partie
+	 * @param j
+	 * 		Joueur courant
+	 * @return
+	 * 		l'indice de la carte si elle est présente sinon -1
+	 */
 	public int jouerCarteStandard(Talon t,Joueur j)
 	{
 		for (int i=0; i<j.main.size();i++)
@@ -93,6 +155,17 @@ public class Imprevisible implements Strategy {
 		return -1;
 	}
 	
+	/**
+	 * liste des priorité pour jouer normalement
+	 * @param t
+	 * 		Talon de la partie
+	 * @param j
+	 * 		Joueur courant
+	 * @param j2
+	 * 		Joueur Suivant
+	 * @return
+	 * 		l'indice de la carte à jouer
+	 */
 	public int comportementNormal(Talon t,Joueur j, Joueur j2)
 	{
 		if(this.jouerCarteStandard(t, j) != -1)
@@ -116,6 +189,18 @@ public class Imprevisible implements Strategy {
 		return 0;	
 	}
 
+	
+	/**
+	 * liste des priorité pour jouer aggressivement
+	 * @param t
+	 * 		Talon de la partie
+	 * @param j
+	 * 		Joueur courant
+	 * @param j2
+	 * 		Joueur Suivant
+	 * @return
+	 * 		l'indice de la carte à jouer
+	 */
 	public int skyzo(Talon t,Joueur j,Joueur j2)
 	{
 		if(this.jouerCarte4(t, j) != -1)
