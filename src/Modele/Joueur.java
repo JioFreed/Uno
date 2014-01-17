@@ -163,6 +163,8 @@ public abstract class Joueur extends Observable {
 	 * @param t
 	 * 		Talon de la partie
 	 * @return
+	 * 		True si les cartes ont la même couleur
+	 * 		False sinon
 	 */
 	public boolean verifierCouleur(Talon t)
 	{
@@ -197,7 +199,9 @@ public abstract class Joueur extends Observable {
 
 	/**
 	 * Vérifier si le joueur est le joueurActuel
-	 * @return
+	 * @return 
+	 * 		True si le joueur est le joueurActuel
+	 * 		False sinon
 	 */
 	public boolean isEstJoueurActuel() {
 		return estJoueurActuel;
@@ -253,12 +257,14 @@ public abstract class Joueur extends Observable {
 	 * Vérifier si le joueur choisi de revoir le coup du joueur précédent
 	 * dans le cas de la carte +4
 	 * @return
+	 * 		True si le joueur choisi de se méfier
+	 * 		False sinon
 	 */
 	public abstract boolean douter();
 	
 	/**
 	 * Permettre au joueur de passer son tour
-	 * @param
+	 * @param t
 	 * 		Talon de la partie 
 	 */
 	public abstract void passerSonTour(Talon t);
@@ -300,6 +306,7 @@ public abstract class Joueur extends Observable {
 	 * @param j2
 	 * 		Joueur suivant
 	 * @return
+	 * 		L'action choisie par le joueur
 	 */
 	public abstract int choisirAction(Talon t,Joueur j, Joueur j2);
 	

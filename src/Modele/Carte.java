@@ -203,6 +203,7 @@ public abstract class Carte {
 	/**
 	 * Récuperer l'image de la carte
 	 * @return
+	 * 		L'image associée
 	 * 	
 	 */
 	public abstract String getImageAssociee();

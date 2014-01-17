@@ -19,7 +19,6 @@ public class JoueurReel extends Joueur {
 		int selectedValue = JOptionPane.showConfirmDialog(null,
 				"Voulez vous verifier le coup?", "Choisir ",
 				JOptionPane.YES_NO_OPTION);
-		System.out.println(selectedValue);
 		return selectedValue == 0 ? true : false;
 	}
 

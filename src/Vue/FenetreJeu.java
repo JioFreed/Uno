@@ -114,6 +114,7 @@ public class FenetreJeu extends JFrame implements Observer
 	{
 		if (((Manche) arg0).isMancheEstFinie() && ((Manche) arg0).getScoreTotal() < Partie.getScoreGagnant())
 		{	
+			if(((Manche) arg0).getJoueurReelExistant())
 			JOptionPane.showMessageDialog(this, ((Manche) arg0).getJoueurGagnant2().getNom() + " a gagner la manche!");
 			this.controleur.init();
 			this.controleur.ajouterObserver(this);

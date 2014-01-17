@@ -72,7 +72,7 @@ public class PanelJoueur extends JPanel implements Observer, ActionListener
 		this.joueur = joueurConcerne;
 		
 		// Forme du panneau principal
-		this.titre = new TitledBorder(joueurConcerne.getNom());
+		this.titre = new TitledBorder(joueurConcerne.getNom() + " : " + joueurConcerne.getScore());
 		this.setBorder(this.titre);
 		this.setPreferredSize(new Dimension(TAILLE_HORIZONTALE + 20, TAILLE_VERTICALE + 20));
         this.setMaximumSize(new Dimension(TAILLE_HORIZONTALE + 20, TAILLE_VERTICALE + 20));

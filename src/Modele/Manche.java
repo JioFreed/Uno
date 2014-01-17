@@ -169,12 +169,7 @@ public class Manche extends Observable {
 				joueurCourant.ajouterCarte(this.pioche.retirerDerniereCarte());
 			}
 		}
-		for (Joueur joueurCourant : this.joueurs) {
-			System.out.println("le joueur " + joueurCourant.getNom()
-					+ " a les cartes suivantes " + joueurCourant.getMain());
-		}
 		this.talon.ajouterCarte(this.pioche.retirerDerniereCarte());
-		System.out.println("le Talon est :  " + this.talon.getListeCarte());
 	}
 
 	/**
@@ -194,36 +189,34 @@ public class Manche extends Observable {
 	/**
 	 * Méthode permettant de définir le joueur qui va distribuer les cartes
 	 * @return
+	 * 		l'indice du distributeur
 	 */
 	public int choixDistributeur() {
+		for (Joueur j : this.joueurs) {
+			if (j instanceof JoueurReel)
+				this.setJoueurReelExistant(true);
+		}
 		this.remplirPioche();
 		this.pioche.melangerCarte();
 		int max = 0;
 		int indice = 0;
-		String top = "";
 		for (int i = 0; i < this.joueurs.size(); i++) {
 			this.joueurCourant = this.joueurs.get(i);
 			this.joueurCourant.ajouterCarte(this.pioche.retirerDerniereCarte());
-			System.out.println("le joueur " + this.joueurCourant.getNom()
-			 + " a la carte " + this.joueurCourant.getMain());
+			if(this.joueurReelExistant)
 			 JOptionPane.showMessageDialog(null,
 			 joueurs.get(i).getNom() + " a la carte  "
 			 +joueurs.get(i).getDerniereCarte().toString(), "alert",
 			 JOptionPane.ERROR_MESSAGE);
-			if (this.joueurCourant.getDerniereCarte() instanceof CartePlusDeux
-					|| this.joueurCourant.getDerniereCarte() instanceof CarteJoker
-					|| this.joueurCourant.getDerniereCarte() instanceof CarteInverser
-					|| this.joueurCourant.getDerniereCarte() instanceof CarteStop
-					|| this.joueurCourant.getDerniereCarte() instanceof CartePlusQuatre)
+			if (!(this.joueurCourant.getDerniereCarte() instanceof CarteStandard))
 				this.joueurCourant.getDerniereCarte().setValeur(0);
 			if (this.joueurCourant.getDerniereCarte().getValeur() > max) {
 				max = this.joueurCourant.getDerniereCarte().getValeur();
-				top = this.joueurCourant.getNom();
 				indice = i;
-
 			}
 
 		}
+		if(this.joueurReelExistant)
 		 JOptionPane.showMessageDialog(null,
 		 " La plus grosse carte appartient à " + joueurs.get(indice).getNom()
 		 + " c'est a lui de distribuer les cartes " , "alert",
@@ -242,10 +235,6 @@ public class Manche extends Observable {
 	public void commencerManche() {
 		this.ordonnerJoueur(this.choixDistributeur());
 		this.distribuerCartes();
-		for (Joueur j : this.joueurs) {
-			if (j instanceof JoueurReel)
-				this.setJoueurReelExistant(true);
-		}
 		this.setMancheEstFinie(false);
 		this.joueurCourant = this.joueurs.get(0);
 		this.joueurSuivant = this.joueurCourant;
@@ -327,8 +316,9 @@ public class Manche extends Observable {
 			for (Joueur joueur : joueurs)
 				joueur.setEstJoueurActuel(false);
 			this.joueurCourant.setEstJoueurActuel(true);
-
 			this.choixJoueur();
+			
+			
 			if (this.joueurCourant instanceof JoueurVirtuel) {
 				int choix = this.joueurCourant.choisirAction(this.talon,
 						this.joueurCourant, this.choixJoueur());
@@ -345,17 +335,6 @@ public class Manche extends Observable {
 							this.joueurCourant, this.choixJoueur());
 					this.carteCourante = this.joueurCourant
 							.getCarteChoisie(str);
-
-					while (!this.talon.getDerniereCarte().comparerCarte(
-							this.carteCourante)) {
-						int str1 = this.joueurCourant.choisirCarte(this.talon,
-								this.joueurCourant, this.choixJoueur());
-						this.carteCourante = this.joueurCourant
-								.getCarteChoisie(str1);
-						str = str1;
-					}
-					this.carteCourante = this.joueurCourant
-							.getCarteChoisie(str);
 					this.jouerCarte();
 				}
 			}
@@ -367,9 +346,6 @@ public class Manche extends Observable {
 	 *  Méthode permettant de jouer
 	 */
 	public void jouerCarte() {
-		//System.out.println("Le talon est : " + this.talon.getDerniereCarte());
-		//System.out.println(this.joueurCourant.getNom() + " a les cartes suivantes " + this.joueurCourant.getMain() );
-		//System.out.println(this.joueurCourant.getNom() + "a joué la carte " + this.getCarteCourante().toString());
 		this.joueurCourant.retirerCarteMain(this.carteCourante);
 		this.talon.ajouterCarte(this.carteCourante);
 		if (this.joueurCourant.getMain().size() == 1)
@@ -389,15 +365,12 @@ public class Manche extends Observable {
 		if (!this.mancheEstFinie) {
 			for (Joueur joueurCourant : this.joueurs) {
 				if (joueurCourant.getMain().isEmpty()) {
-					score = 0;
 					for (Joueur joueurCourant2 : this.joueurs) {
 						for (int i = 0; i < joueurCourant2.main.size(); i++) {
 							score += joueurCourant2.main.get(i).getPoint();
 						}
 					}
 					joueurCourant.setScore(score);
-					System.out.println(joueurCourant.getNom()
-							+ " a gagné la Manche avec " + this.score);
 					this.getScoreTotal();
 					this.setJoueurGagnant(joueurCourant);
 					this.setMancheEstFinie(true);
@@ -418,12 +391,8 @@ public class Manche extends Observable {
 		this.mancheEstFinie = mancheEstFinie;
 		if (this.mancheEstFinie) {
 
-			for (Joueur joueurCourant : this.joueurs) {
-
-				System.out.println(joueurCourant.getNom() + " a  "
-						+ joueurCourant.getScore());
+			for (Joueur joueurCourant : this.joueurs)
 				joueurCourant.main.clear();
-			}
 			this.setChanged();
 		}
 
@@ -448,7 +417,7 @@ public class Manche extends Observable {
 	 */
 	public Joueur getJoueurGagnant() {
 		for (Joueur joueurCourant : this.joueurs) {
-			if (joueurCourant.getScore() >= 500)
+			if (joueurCourant.getScore() >= Partie.getScoreGagnant())
 				return joueurCourant;
 		}
 		return null;
@@ -460,17 +429,14 @@ public class Manche extends Observable {
 	 */
 	public void setUno(boolean v) {
 		this.uno = v;
-		if (this.uno) {
-			System.out.println(this.joueurCourant.getNom() + " UNO !!!! ");
+		if (this.uno) 
 			this.setChanged();
-		}
 	}
 	
 	public void setJoueurGagnant(Joueur j) {
 		this.joueurGagnant = j;
 	}
-	
-	
+
 	public Joueur getJoueurGagnant2() {
 		return this.joueurGagnant;
 	}

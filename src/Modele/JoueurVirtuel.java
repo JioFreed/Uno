@@ -10,8 +10,8 @@ public class JoueurVirtuel extends Joueur {
 	/**
 	 * Liste des noms
 	 */
-	private String[] name= new String [] {"Naruto", "Luffy", "Ichigo","Obama","Krytos","Wolverine",
-			"Dr Who","Messi","Barney","SpiderMan","Batman","Arrow","Spielberg","Hawking","Zeus","IronMan"};
+	private String[] name= new String [] {"Naruto", "Luffy", "Ichigo","Obama","Krytos",
+			"DrWho","Messi","Barney","Batman","Arrow","Spielberg","Hawking","Zeus"};
 	
 	/**
 	 * Stratégie du joueur virtuel
@@ -63,7 +63,6 @@ public class JoueurVirtuel extends Joueur {
 
 	@Override
 	public boolean douter() {
-		System.out.println(this.getNom() + " doute et demande de voir les cartes");
 		return strategy.douter();
 		
 	}
